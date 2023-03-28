@@ -28,3 +28,13 @@
 [picheta - obfuscateur en ligne](https://picheta.me/obfuscator)
 
 [cxx-obfus](http://stunnix.com/prod/cxxo/)
+
+### Malware developpement 
+[Malware Development – Welcome to the Dark Side](https://niiconsulting.com/checkmate/2018/02/malware-development-welcome-dark-side-part-1/)
+
+[Malware Development – Welcome to the Dark Side part 2](https://niiconsulting.com/checkmate/2018/02/malware-development-welcome-dark-side-part-2-1/)
+
+[C++ Writing Ethical RAT using Windows API](https://www.youtube.com/watch?v=Ibf6F3MuLFQ&list=PLSqjYSJtqeaV1Hdk2ZVnr90KpDObfzDSs&index=6)
+
+### Suggestion 
+[forum de merde](https://cplusplus.com/forum/windows/104368/)
