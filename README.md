@@ -38,3 +38,10 @@
 
 ### Suggestion 
 [forum de merde](https://cplusplus.com/forum/windows/104368/)
+
+### Hidding it 
+[How I created a Trojan Malware - Ethical Hacking](https://gourav-dhar.com/blogs/how-i-created-my-trojan-malware-ethical-hacking/)
+
+### SSH 
+[A typical SSH session](https://api.libssh.org/master/libssh_tutor_guided_tour.html)
+
