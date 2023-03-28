@@ -45,3 +45,5 @@
 ### SSH 
 [A typical SSH session](https://api.libssh.org/master/libssh_tutor_guided_tour.html)
 
+### windows subsystem
+[WSL2](https://www.jetbrains.com/help/clion/how-to-use-wsl-development-environment-in-product.html)
