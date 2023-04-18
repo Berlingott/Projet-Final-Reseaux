@@ -5,9 +5,6 @@
 #ifndef PROJET_FINAL_RESEAUX_RUNNING_H
 #define PROJET_FINAL_RESEAUX_RUNNING_H
 
-#include <Windows.h>
-#include <Winbase.h>
-#include <string>
 
 #include <Windows.h>
 #include <string>
@@ -16,9 +13,15 @@
 #include <time.h>
 #include <fstream>
 #include <thread>
+
+#include "Settings.h"
+#include "StringConvertion.h"
+#include "CommandPrompt.h"
+#include "utility.h"
+
 class Running {
 private:
-
+    static bool processParameter(std::string &command, std::string compCommand);
 protected:
 public:
     //Variables
@@ -29,12 +32,24 @@ public:
     static bool installing;			//bool - en train d'installer ou pas
 
     //Fonctions d'initialisation
-    static bool initialisation(); //initialisation, lancer au démarage de l'application
+    static bool initialisation(); //initialisation, lancer au démarage de l'application  // ============================Debut initialisation
     static std::string getCurrentPath();
     static std::string getInstallFolder();
-    static std::string getInstallPath(std::string instFolder);
+    static std::string getInstallPath(const std::string& instFolder);
+    static bool locationSet();
+    static bool startupSet();
+    static bool installed();
+    static void setLocation();
+    static bool directoryExists(const char* dirName);
+    static bool regValueExists(HKEY hKey, LPCSTR keyPath, LPCSTR valueName);	//checks if a certain value exists in the registry
+    static void runInstalled();
+    static void startProcess(LPCTSTR lpApplicationName, LPTSTR lpArguments);		//starts a process
+    static bool setStartup(PCWSTR pszAppName, PCWSTR pathToExe, PCWSTR args);	//registers a program in startup with supplied name, path to exe and startup arguments
+    //==================================================================================================================Fin Initialisation
 
     //Autres Fonctions
+    static std::string processCommand(std::string command);
+
 };
 
 
