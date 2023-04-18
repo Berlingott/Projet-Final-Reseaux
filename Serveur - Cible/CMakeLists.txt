@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "-static -mwindows")
 
-add_executable(Serveur___Cible main.cpp Running.cpp)
+add_executable(Serveur___Cible main.cpp  Client.h Client.cpp)
