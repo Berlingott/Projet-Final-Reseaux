@@ -39,8 +39,32 @@ MyPNet::IPEndpoint::IPEndpoint(const char *ip, unsigned short port) {
             memcpy(&ip_bytes[0], &addr.S_un.S_addr, sizeof(ULONG));// destination, source, nombre/size de bite a copié
             return;
         }
-        // resoudre le hostna,e
-        getaddrinfo()
+
+        // resoudre le hostname
+
+        addrinfo hints = {}; // hints pour filter les résultat de gataddrifnfo
+        hints.ai_family = AF_INET;
+        addrinfo * hostinfo = nullptr;
+        result = getaddrinfo(ip, NULL, &hints, &hostinfo);
+
+        if (result==0){
+            auto * host_addr = reinterpret_cast<sockaddr_in*>(hostinfo->ai_addr);
+            // host_addr->sin_addr.S_un.S_addr;
+            ip_string.resize(16);
+            inet_ntop(AF_INET, &host_addr->sin_addr.S_un.S_addr, &ip_string[0], 16);
+
+            hostname = ip;
+            ULONG ip_long = host_addr->sin_addr.S_un.S_addr;
+            ip_bytes.resize(sizeof(ULONG));
+
+            memcpy(&ip_bytes[0],&ip_long,sizeof(ULONG));
+
+            ipversion = IPVersion::IPv4;
+
+            freeaddrinfo(hostinfo);
+
+            return;
+        }
     }
 
 

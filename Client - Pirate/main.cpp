@@ -11,8 +11,9 @@ int main(){ // Main client -- cible
             std::cout << "Hostname: " << test.get_hostname() << std::endl;
             std::cout << "IP: " << test.get_ipstring()<<std::endl;
             std::cout << "Port: " << test.get_port() << std::endl;
-            std::cout << "Bytes: " << test.get_port() << std::endl;
             std::cout << std::endl;
+
+            std::cout << "Bytes: "<< std::endl;
 
             for (auto & digit : test.get_ip_byte()) {
                 std::cout << int(digit) << std::endl;
