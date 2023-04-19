@@ -68,3 +68,5 @@ https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-wsastartu
 [getaddrinfo](https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfo)
 [Bind](https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-bind)
 [Hey, Look, LISTEN](https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-listen)
+[accept](https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-accept)
+[connect](https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-connect)

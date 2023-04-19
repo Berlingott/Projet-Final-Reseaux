@@ -9,6 +9,7 @@
 #include "IPVersion.h"
 #include "SocketOptions.h"
 #include "IPEndpoint.h"
+#include "winsock2.h"
 
 namespace MyPNet{
     class Socket {
@@ -25,6 +26,8 @@ namespace MyPNet{
         PResult CloseSocket();
         PResult Bind(IPEndpoint endpoint);
         PResult Listen(IPEndpoint endpoint, int backlog = 5);
+        PResult AcceptConnection(Socket & outSocket);
+        PResult ConnectTo(IPEndpoint endpoint);
         //getter
         SocketHandle GetHandle();
         IPVersion   GetIPVersion();

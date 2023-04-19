@@ -100,5 +100,30 @@ MyPNet::PResult Socket::SetSocketOptions(SocketOptions option, WINBOOL value) {
         return PResult::P_Success;
     }
 
+    PResult Socket::AcceptConnection(Socket &outSocket) {
+        SocketHandle acceptedConnectionHandle = accept(handle, nullptr, nullptr); // fait rien tant que pas de connection établie
+        if (acceptedConnectionHandle == INVALID_SOCKET){
+            //todo gestion d'erreur
+            return PResult::P_FAILED;
+        }
+
+        outSocket = Socket(IPVersion::IPv4, acceptedConnectionHandle);
+
+        return PResult::P_Success;
+    }
+
+    PResult Socket::ConnectTo(IPEndpoint endpoint) {
+        sockaddr_in addr = endpoint.GetSockaddrInIPv4();
+        int result = connect(handle, (sockaddr *)(&addr), sizeof(sockaddr_in) );
+
+        //si success result = 0 sinon donne un nombte
+        if (result !=0){
+            //todo gestion d'erreur
+            return PResult::P_FAILED;
+        }
+
+        return P_Success;
+    }
+
 
 }
