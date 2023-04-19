@@ -72,6 +72,17 @@ MyPNet::IPEndpoint::IPEndpoint(const char *ip, unsigned short port) {
 
 }
 
+sockaddr_in MyPNet::IPEndpoint::GetSockaddrInIPv4() {
+    assert(ipversion == IPVersion::IPv4); //s'assure que l'ip fourni est du format ipv4 et non ipv6
+    sockaddr_in addr = {};
+    addr.sin_family = AF_INET;
+    memcpy(&addr.sin_addr, &ip_bytes[0],sizeof(ULONG));
+    addr.sin_port = htons(port); // hosttonetwork
+
+
+    return addr;
+}
+
 /* https://learn.microsoft.com/en-us/windows/win32/api/winsock2/ns-winsock2-in_addr
 
 struct in_addr {

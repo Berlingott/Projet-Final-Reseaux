@@ -8,6 +8,7 @@
 #include "PResult.h"
 #include "IPVersion.h"
 #include "SocketOptions.h"
+#include "IPEndpoint.h"
 
 namespace MyPNet{
     class Socket {
@@ -22,6 +23,7 @@ namespace MyPNet{
         //fonction
         PResult CreateSocket(); // ouverture d'un socket, retourne l'adresse ip
         PResult CloseSocket();
+        PResult Bind(IPEndpoint endpoint);
         //getter
         SocketHandle GetHandle();
         IPVersion   GetIPVersion();

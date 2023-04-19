@@ -10,6 +10,8 @@
 #include "IPVersion.h"
 #include <ws2tcpip.h>
 #include "IPEndpoint.h"
+#include <cassert>
+
 
 namespace MyPNet{
     class IPEndpoint
@@ -33,6 +35,7 @@ namespace MyPNet{
         std::vector<uint8_t> get_ip_byte();
         unsigned short get_port();
         std::string get_ipstring();
+        sockaddr_in GetSockaddrInIPv4();
     };
 }
 #endif //MYPNET_IPENDPOINT_H

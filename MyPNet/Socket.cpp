@@ -70,5 +70,19 @@ MyPNet::PResult Socket::SetSocketOptions(SocketOptions option, WINBOOL value) {
         return PResult::P_Success;
 }
 
+    PResult Socket::Bind(IPEndpoint endpoint) {
+
+        sockaddr_in addr = endpoint.GetSockaddrInIPv4();
+        int result = bind(handle, (sockaddr*)(&addr), sizeof(sockaddr_in) );
+
+        if (result){
+            //todo gestion d'erreur su le bind cause problème
+        }
+
+        //int result = bind(handle,)
+
+        return PResult::P_Success;
+    }
+
 
 }
