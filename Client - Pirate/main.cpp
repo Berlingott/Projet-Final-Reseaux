@@ -9,11 +9,11 @@ int main(){ // Main client -- cible
 
         MyPNet::Socket socket;
         if(socket.CreateSocket() == MyPNet::PResult::P_Success){
-            std::cerr << std::endl<< "Création du socket réussi";
-            if (socket.Bind(MyPNet::IPEndpoint("127.0.0.1",1337))){
+            std::cout << std::endl<< "Création du socket réussi"<<std::endl;
+            if (socket.Listen(MyPNet::IPEndpoint("127.0.0.1",1337))==MyPNet::PResult::P_Success){
 
-                std::cout << "Création du Socket complété";
-                
+                std::cout << "Écoute du Socket complété"<<std::endl;
+
             }
             socket.CloseSocket();
         }

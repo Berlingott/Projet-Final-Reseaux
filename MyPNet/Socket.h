@@ -24,6 +24,7 @@ namespace MyPNet{
         PResult CreateSocket(); // ouverture d'un socket, retourne l'adresse ip
         PResult CloseSocket();
         PResult Bind(IPEndpoint endpoint);
+        PResult Listen(IPEndpoint endpoint, int backlog = 5);
         //getter
         SocketHandle GetHandle();
         IPVersion   GetIPVersion();

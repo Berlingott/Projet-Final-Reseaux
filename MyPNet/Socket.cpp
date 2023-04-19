@@ -84,5 +84,21 @@ MyPNet::PResult Socket::SetSocketOptions(SocketOptions option, WINBOOL value) {
         return PResult::P_Success;
     }
 
+    PResult Socket::Listen(IPEndpoint endpoint, int backlog) {
+        if(Bind(endpoint) != PResult::P_Success){
+            //todo gestion d'erreur lors dubind
+        }
+
+        int result = listen(handle, backlog); //attend pour un incoming connections
+        //return 0 on success
+
+        if(result != 0){
+            //todo gestion d'erreur lors de listen
+            return PResult::P_FAILED;
+        }
+
+        return PResult::P_Success;
+    }
+
 
 }

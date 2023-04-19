@@ -8,7 +8,8 @@
 namespace MyPNet{
     enum PResult{
         P_Success,
-        P_NotYetImplemented
+        P_NotYetImplemented,
+        P_FAILED
     };
 }
 

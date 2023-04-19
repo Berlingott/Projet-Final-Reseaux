@@ -23,12 +23,12 @@
   <component name="ChangeListManager">
     <list default="true" id="527e96f3-8d11-4d81-b667-500942689616" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../Client - Pirate/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Client - Pirate/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyPNet/IPEndpoint.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/IPEndpoint.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyPNet/IPEndpoint.h" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/IPEndpoint.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyPNet/PResult.h" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/PResult.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MyPNet/Socket.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/Socket.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MyPNet/Socket.h" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/Socket.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +106,7 @@
       <workItem from="1681788949164" duration="681000" />
       <workItem from="1681817424281" duration="4236000" />
       <workItem from="1681868013226" duration="409000" />
-      <workItem from="1681872097545" duration="9882000" />
+      <workItem from="1681872097545" duration="10604000" />
     </task>
     <servers />
   </component>
@@ -123,5 +123,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/main.cpp</url>
+          <line>8</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

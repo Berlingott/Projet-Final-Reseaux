@@ -67,3 +67,4 @@ https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-wsastartu
 [memcopy](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/memcpy-wmemcpy?view=msvc-170)
 [getaddrinfo](https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfo)
 [Bind](https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-bind)
+[Hey, Look, LISTEN](https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-listen)
