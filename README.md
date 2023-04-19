@@ -1,4 +1,5 @@
 # Projet Final Reseaux d'Ordinateur
+
 ### Participants 
 * Simon Duchesne - DUCS20069507
 * Alexandre Bourdarie - BOUA28070007
@@ -9,6 +10,7 @@
 
 
 # Ressources
+
 ### Execution SHELL 
 [Lancement d’applications (ShellExecute, ShellExecuteEx, SHELLEXECUTEINFO)](https://learn.microsoft.com/fr-fr/windows/win32/shell/launch?redirectedfrom=MSDN)
 
@@ -47,3 +49,19 @@
 
 ### windows subsystem
 [WSL2](https://www.jetbrains.com/help/clion/how-to-use-wsl-development-environment-in-product.html)
+
+### windows sockets
+https://www.youtube.com/watch?v=sBFohRqdBcE&list=PLcacUGyBsOIA1YUqvKd7p8uvsG_FCt7-U
+
+https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-wsastartup
+
+### connections et envoie de commandes CMD
+
+### autres 
+[MAKEWORD](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ms632663(v=vs.85))
+[SETSOCKOPT](https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-setsockopt)
+[Nagle's algorithm](https://en.wikipedia.org/wiki/Nagle%27s_algorithm)
+[uint8](https://en.cppreference.com/w/cpp/types/integer)
+[in_addr](https://learn.microsoft.com/en-us/windows/win32/api/winsock2/ns-winsock2-in_addr)
+[inet_pton](https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-inet_pton)
+[memcopy](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/memcpy-wmemcpy?view=msvc-170)
