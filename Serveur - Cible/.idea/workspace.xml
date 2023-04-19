@@ -22,32 +22,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="527e96f3-8d11-4d81-b667-500942689616" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../MyPNet/IPEndpoint.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MyPNet/IPEndpoint.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MyPNet/IPVersion.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MyPNet/IncludeMe.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MyPNet/Network.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MyPNet/Network.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MyPNet/PResult.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MyPNet/Socket.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MyPNet/Socket.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MyPNet/SocketHandle.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MyPNet/SocketOptions.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMD.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMD.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CoreFunction.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CoreFunction.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PacketType.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ParametresGeneraux.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ParametresGeneraux.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client - Pirate/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client - Pirate/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client - Pirate/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Client - Pirate/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyPNet/IPEndpoint.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/IPEndpoint.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyPNet/IPEndpoint.h" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/IPEndpoint.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyPNet/IncludeMe.h" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/IncludeMe.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Client.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client.h" beforeDir="false" afterPath="$PROJECT_DIR$/Client.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +106,7 @@
       <workItem from="1681788949164" duration="681000" />
       <workItem from="1681817424281" duration="4236000" />
       <workItem from="1681868013226" duration="409000" />
-      <workItem from="1681872097545" duration="7774000" />
+      <workItem from="1681872097545" duration="8987000" />
     </task>
     <servers />
   </component>

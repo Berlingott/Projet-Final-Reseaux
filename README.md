@@ -65,3 +65,4 @@ https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-wsastartu
 [in_addr](https://learn.microsoft.com/en-us/windows/win32/api/winsock2/ns-winsock2-in_addr)
 [inet_pton](https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-inet_pton)
 [memcopy](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/memcpy-wmemcpy?view=msvc-170)
+[getaddrinfo](https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfo)

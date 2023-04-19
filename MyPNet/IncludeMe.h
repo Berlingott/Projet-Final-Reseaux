@@ -7,5 +7,6 @@
 
 #include "Network.h"
 #include "Socket.h"
+#include "IPEndpoint.h"
 
 #endif //SERVEUR___CIBLE_INCLUDEME_H

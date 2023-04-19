@@ -9,6 +9,7 @@
 #include <vector>
 #include "IPVersion.h"
 #include <ws2tcpip.h>
+#include "IPEndpoint.h"
 
 namespace MyPNet{
     class IPEndpoint

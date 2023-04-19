@@ -36,10 +36,11 @@ MyPNet::IPEndpoint::IPEndpoint(const char *ip, unsigned short port) {
             ipversion = IPVersion::IPv4;
 
             ip_bytes.resize((sizeof(ULONG)));
-            memcpy();// destination, source, nombre/size de bite a copié
-
-
+            memcpy(&ip_bytes[0], &addr.S_un.S_addr, sizeof(ULONG));// destination, source, nombre/size de bite a copié
+            return;
         }
+        // resoudre le hostna,e
+        getaddrinfo()
     }
 
 
