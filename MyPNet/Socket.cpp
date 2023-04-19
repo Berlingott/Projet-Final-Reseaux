@@ -101,12 +101,16 @@ MyPNet::PResult Socket::SetSocketOptions(SocketOptions option, WINBOOL value) {
     }
 
     PResult Socket::AcceptConnection(Socket &outSocket) {
-        SocketHandle acceptedConnectionHandle = accept(handle, nullptr, nullptr); // fait rien tant que pas de connection établie
+        sockaddr_in addr = {};
+        int len = sizeof(sockaddr_in);
+        SocketHandle acceptedConnectionHandle = accept(handle, (sockaddr*)(&addr), &len); // fait rien tant que pas de connection établie
+
         if (acceptedConnectionHandle == INVALID_SOCKET){
             //todo gestion d'erreur
             return PResult::P_FAILED;
         }
-
+        IPEndpoint newConnectionEndpoint((sockaddr*)&addr);
+        newConnectionEndpoint.PrintAllInfo();
         outSocket = Socket(IPVersion::IPv4, acceptedConnectionHandle);
 
         return PResult::P_Success;

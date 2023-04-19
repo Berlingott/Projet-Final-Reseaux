@@ -11,6 +11,7 @@
 #include <ws2tcpip.h>
 #include "IPEndpoint.h"
 #include <cassert>
+#include <iostream>
 
 
 namespace MyPNet{
@@ -29,6 +30,8 @@ namespace MyPNet{
     public:
         //constructeur
         IPEndpoint(const char * ip, unsigned short port);
+        IPEndpoint(sockaddr * addr);
+
         //getter
         IPVersion get_ipversion();
         std::string get_hostname();
@@ -36,6 +39,9 @@ namespace MyPNet{
         unsigned short get_port();
         std::string get_ipstring();
         sockaddr_in GetSockaddrInIPv4();
+
+        //fonctions
+        void PrintAllInfo();
     };
 }
 #endif //MYPNET_IPENDPOINT_H

@@ -10,7 +10,7 @@
 #include "SocketOptions.h"
 #include "IPEndpoint.h"
 #include "winsock2.h"
-
+#include "iostream"
 namespace MyPNet{
     class Socket {
     private:

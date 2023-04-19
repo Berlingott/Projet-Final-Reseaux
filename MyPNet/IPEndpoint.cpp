@@ -83,6 +83,34 @@ sockaddr_in MyPNet::IPEndpoint::GetSockaddrInIPv4() {
     return addr;
 }
 
+MyPNet::IPEndpoint::IPEndpoint(sockaddr * addr) { // constructeur lors d'une connexion externe
+    assert(addr->sa_family == AF_INET);
+    sockaddr_in * addrv4 = reinterpret_cast<sockaddr_in*>(addr);
+    ipversion = IPVersion::IPv4;
+    port = ntohs(addrv4->sin_port);
+    ip_bytes.resize(sizeof(ULONG));
+    ip_string.resize(16);
+    inet_ntop(AF_INET, &addrv4->sin_addr.S_un.S_addr, &ip_string[0], 16);
+
+    hostname = ip_string;
+}
+
+void MyPNet::IPEndpoint::PrintAllInfo() {
+    if (ipversion == IPVersion::IPv4){std::cout << "MODELE: IPv4" << std::endl;}
+    if (ipversion == IPVersion::IPv6){std::cout << "MODELE: IPv6" << std::endl;}
+
+    std::cout << "Host:" << hostname << std::endl;
+    std::cout << "ip:"<< ip_string << std::endl;
+    std::cout << "port: "<<port << std::endl;
+    std::cout << "Bytes IP: "<< std::endl;
+/*
+    for (auto & digit : ip_bytes ) {
+        std::cout << (int)digit << std::endl;
+    }
+*/
+
+}
+
 /* https://learn.microsoft.com/en-us/windows/win32/api/winsock2/ns-winsock2-in_addr
 
 struct in_addr {
