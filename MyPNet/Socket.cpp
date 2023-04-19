@@ -129,5 +129,31 @@ MyPNet::PResult Socket::SetSocketOptions(SocketOptions option, WINBOOL value) {
         return P_Success;
     }
 
+    PResult Socket::SendPaquets(void *data, int numberOfBytes, int &bytesSent) {
+        bytesSent = send(handle, (const char*)data, numberOfBytes, NULL);//last arg c'est un flag
+        if (bytesSent == SOCKET_ERROR){
+            int error = WSAGetLastError();
+            //todo implémentation des erreur
+        }
+
+        return PResult::P_Success;
+    }
+
+    PResult Socket::ReceivePaquets(void *destination, int numberOfBytes, int &bytesReceived) {
+        bytesReceived = recv(handle, (char*)destination, numberOfBytes, NULL);//last arg c'est un flag
+
+        if(bytesReceived == 0){ // connection gracefully closed
+            return PResult::P_FAILED;
+            //todo a implementer en cas de probleme de connexion lors de l'échange de paquets
+        }
+        if (bytesReceived == SOCKET_ERROR){
+            int error = WSAGetLastError();
+            return PResult::P_FAILED;
+            //todo a implementer en cas de probleme de connexion lors de l'échange de paquets
+        }
+
+        return PResult::P_Success;
+    }
+
 
 }

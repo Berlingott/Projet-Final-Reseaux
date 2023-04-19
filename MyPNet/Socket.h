@@ -28,6 +28,8 @@ namespace MyPNet{
         PResult Listen(IPEndpoint endpoint, int backlog = 5);
         PResult AcceptConnection(Socket & outSocket);
         PResult ConnectTo(IPEndpoint endpoint);
+        PResult SendPaquets(void * data, int numberOfBytes, int & bytesSent);
+        PResult ReceivePaquets(void * destination, int numberOfBytes, int & bytesReceived);
         //getter
         SocketHandle GetHandle();
         IPVersion   GetIPVersion();
