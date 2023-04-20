@@ -13,6 +13,10 @@ namespace MyPNet{
         PT_invalid,
         PT_ChatMessage,
         PT_IntegerArray,
+        PT_FIleTransferRequest,
+        PT_EndOfAFileTransfer,
+        PT_CMDcommand,
+
     };
 }
 

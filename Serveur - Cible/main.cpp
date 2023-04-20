@@ -1,9 +1,17 @@
-#include "iostream"
-#include "Client.h"
-#include "ParametresGeneraux.h"
-#include "../MyPNet/IncludeMe.h"
+#include "installationAndStart.h"
+
 int main(){ // Main client -- cible
-    if(MyPNet::Network::Initialize()){
+
+    if(installationAndStart::init() != OperationState::OP_Success){ // launch init et s'assure du s
+        //todo implémantation d'un problème lors de l'installation
+        std::cerr << "Problème lors de l'installation";
+    }
+    return 0;
+}
+
+
+/*
+     if(MyPNet::Network::Initialize()){
 
         MyPNet::Socket socket;
         if(socket.CreateSocket() == MyPNet::PResult::P_Success){
@@ -42,4 +50,5 @@ int main(){ // Main client -- cible
 
     MyPNet::Network::Shutdown(); //ferme l'interface
     return 0;
-}
+
+ */
