@@ -8,24 +8,22 @@ int main(){ // Main client -- cible
         MyPNet::Socket socket;
         if(socket.CreateSocket() == MyPNet::PResult::P_Success){
             std::cout << std::endl<< "Création du socket réussi"<<std::endl;
+
             if (socket.ConnectTo(MyPNet::IPEndpoint("127.0.0.1",1337))==MyPNet::PResult::P_Success){
                 std::cout <<"Nouvelle connexion établie vers le malfrat!" << std::endl;
 
                 //send paquets
-                std::string buffer = "Bonjour, je suis une pauvre victime";
+                uint32_t  a, b, c;
+                a=4;
+                b=6;
+                c=9;
+                MyPNet::Packet packet;
+                packet << std::string ("Bonjour");
+                packet << std::string ("hello");
 
                 while(true){
-                    uint32_t bufferSize = buffer.size();
-                    bufferSize = htonl(bufferSize);
-
-                    int result = socket.SendALL(&bufferSize, sizeof(uint32_t));
-
-                    if(result != MyPNet::PResult::P_Success){
-                        break;
-                    }
-
-                    result = socket.SendALL(buffer.data(), buffer.size());
-                    if(result != MyPNet::PResult::P_Success){
+                    MyPNet::PResult result = socket.SendPaquets(packet);
+                    if (result != MyPNet::PResult::P_Success){
                         break;
                     }
                 }

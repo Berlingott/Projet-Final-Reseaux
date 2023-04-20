@@ -12,6 +12,7 @@
 #include "winsock2.h"
 #include "iostream"
 #include "Settings.h"
+#include "Packet.h"
 namespace MyPNet{
     class Socket {
     private:
@@ -33,7 +34,8 @@ namespace MyPNet{
         PResult ReceivePaquets(void * destination, int numberOfBytes, int & bytesReceived);
         PResult SendALL(const void * data, int numberOfBytes);
         PResult ReceiveALL(void * destination, int numberOfBytes);
-
+        PResult SendPaquets(Packet & packet);
+        PResult ReceivePaquets(Packet & packet);
         //getter
         SocketHandle GetHandle();
         IPVersion   GetIPVersion();

@@ -15,29 +15,27 @@ int main(){ // Main client -- cible
                 //new connection
                 MyPNet::Socket connectionACible;
                 std::cout<<"Lancement de l'écoute pour la connetion d'une victime" << std::endl;
+
                 if (socket.AcceptConnection(connectionACible) == MyPNet::PResult::P_Success){
                     std::cout<<"Victime connecté" << std::endl;
 
                     std::string buffer = "";
-
+                    uint32_t  a(3), b(2), c(1);
+                    MyPNet::Packet packet;
                     while(true){
-                        uint32_t bufferSize = 0;
-                        bufferSize = htonl(bufferSize);
-                        int result = connectionACible.ReceiveALL(&bufferSize, sizeof(uint32_t));
-                        if(result != MyPNet::PResult::P_Success){
-                            break;
-                        }
-                        bufferSize = ntohl(bufferSize);
+                        MyPNet::PResult result = connectionACible.ReceivePaquets(packet);
 
-                        buffer.resize(bufferSize);
-                        result = connectionACible.ReceiveALL(&buffer[0], bufferSize);
                         if(result != MyPNet::PResult::P_Success){
                             break;
                         }
-                        std::cout << "[" << bufferSize << "] - " << buffer << std::endl;
+                        std::string a;
+                        std::string b;
+                        packet >> a >> b ;
+                        std::cout << a << b;
                     }
                 }
             }
+
             socket.CloseSocket();
         }
     }

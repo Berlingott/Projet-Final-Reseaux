@@ -189,5 +189,43 @@ MyPNet::PResult Socket::SetSocketOptions(SocketOptions option, WINBOOL value) {
         return P_Success;
     }
 
+    PResult Socket::SendPaquets(Packet &packet) {
+        uint32_t encodedPacketSize = htonl(packet.buffer.size());
+        PResult result = SendALL(&encodedPacketSize, sizeof(uint32_t));
+
+        if (result != PResult::P_Success){
+            return PResult::P_FAILED;
+        }
+
+        result = SendALL(packet.buffer.data(), packet.buffer.size());
+
+        if (result != PResult::P_Success){
+            return PResult::P_FAILED;
+        }
+
+        return P_Success;
+    }
+
+    PResult Socket::ReceivePaquets(Packet &packet) {
+        packet.Clear();
+        uint32_t encodedSize = 0;
+        PResult result = ReceiveALL(&encodedSize, sizeof(uint32_t));
+
+        if (result != PResult::P_Success){
+            return PResult::P_FAILED;
+        }
+
+        uint32_t bufferSize = ntohl(encodedSize);
+        packet.buffer.resize(bufferSize);
+        result = ReceiveALL(&packet.buffer[0], bufferSize);
+
+        if (result != PResult::P_Success){
+            return PResult::P_FAILED;
+        }
+
+
+        return P_Success;
+    }
+
 
 }

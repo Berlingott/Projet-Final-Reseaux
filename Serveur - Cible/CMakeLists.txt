@@ -15,6 +15,9 @@ add_library(
         ../MyPNet/SocketOptions.h
         ../MyPNet/IPEndpoint.cpp
         ../MyPNet/IPEndpoint.h
+        ../MyPNet/Packet.cpp
+        ../MyPNet/Packet.h
+
 )
 
 set_target_properties(MyPNet PROPERTIES LINKER_LANGUAGE CXX)
