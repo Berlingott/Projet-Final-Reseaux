@@ -5,7 +5,7 @@
 * Alexandre Bourdarie - BOUA28070007
 
 
-# Requis
+# Devis
 [Demandes et requis (PDF)](./readmefiles/Mini-Projet%20Conception%20vf.pdf)
 
 
@@ -59,14 +59,26 @@ https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-wsastartu
 
 ### autres 
 [MAKEWORD](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ms632663(v=vs.85))
+
 [SETSOCKOPT](https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-setsockopt)
+
 [Nagle's algorithm](https://en.wikipedia.org/wiki/Nagle%27s_algorithm)
+
 [uint8](https://en.cppreference.com/w/cpp/types/integer)
+
 [in_addr](https://learn.microsoft.com/en-us/windows/win32/api/winsock2/ns-winsock2-in_addr)
+
 [inet_pton](https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-inet_pton)
+
 [memcopy](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/memcpy-wmemcpy?view=msvc-170)
+
 [getaddrinfo](https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfo)
+
 [Bind](https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-bind)
+
 [Hey, Look, LISTEN](https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-listen)
+
 [accept](https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-accept)
+
 [connect](https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-connect)
+

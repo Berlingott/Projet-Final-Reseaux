@@ -16,7 +16,7 @@ int main(){ // Main client -- cible
                 int bytesSent=0;
                 int result = MyPNet::PResult::P_Success;
                 while(result==MyPNet::PResult::P_Success){
-                    result = socket.SendPaquets(buffer, 256, bytesSent);
+                    result = socket.SendALL(buffer, 256);
                     Sleep(500);
                 }
                 //

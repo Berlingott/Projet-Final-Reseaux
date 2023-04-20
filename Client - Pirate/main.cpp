@@ -21,7 +21,7 @@ int main(){ // Main client -- cible
                     int bytesReceived = 0;
                     int result = MyPNet::PResult::P_Success;
                     while (result == MyPNet::PResult::P_Success){
-                        result = connectionACible.ReceivePaquets(buffer,256,bytesReceived);
+                        result = connectionACible.ReceiveALL(buffer,256);
                         if (result != MyPNet::PResult::P_Success){
                             break;
                         }

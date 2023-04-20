@@ -25,6 +25,7 @@
       <change beforePath="$PROJECT_DIR$/../Client - Pirate/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Client - Pirate/main.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MyPNet/Socket.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/Socket.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MyPNet/Socket.h" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/Socket.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
@@ -104,7 +105,7 @@
       <workItem from="1681788949164" duration="681000" />
       <workItem from="1681817424281" duration="4236000" />
       <workItem from="1681868013226" duration="409000" />
-      <workItem from="1681872097545" duration="14813000" />
+      <workItem from="1681872097545" duration="15456000" />
     </task>
     <servers />
   </component>

@@ -155,5 +155,39 @@ MyPNet::PResult Socket::SetSocketOptions(SocketOptions option, WINBOOL value) {
         return PResult::P_Success;
     }
 
+    PResult Socket::SendALL(void *data, int numberOfBytes) {
+        int totalBytesSent = 0;
+        while (totalBytesSent < numberOfBytes){
+            int bytesRemaining = numberOfBytes - totalBytesSent;
+            int byteSent = 0;
+            char * bufferOffset = (char*)data + totalBytesSent;
+            PResult result = SendPaquets(bufferOffset, bytesRemaining, byteSent);
+            if (result != PResult::P_Success){
+                //todo gestion de probleme
+                return PResult::P_FAILED;
+            }
+            totalBytesSent += byteSent;
+        }
+
+        return P_Success;
+    }
+
+    PResult Socket::ReceiveALL(void *destination, int numberOfBytes) {
+        int totalBytesReceived = 0;
+        while (totalBytesReceived < numberOfBytes){
+            int bytesRemaining = numberOfBytes - totalBytesReceived;
+            int byteReceived = 0;
+            char * bufferOffset = (char*)destination + totalBytesReceived;
+            PResult result = ReceivePaquets(bufferOffset, bytesRemaining, byteReceived);
+            if (result != PResult::P_Success){
+                //todo gestion de probleme
+                return PResult::P_FAILED;
+            }
+            totalBytesReceived += byteReceived;
+        }
+
+        return P_Success;
+    }
+
 
 }

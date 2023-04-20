@@ -30,6 +30,9 @@ namespace MyPNet{
         PResult ConnectTo(IPEndpoint endpoint);
         PResult SendPaquets(void * data, int numberOfBytes, int & bytesSent);
         PResult ReceivePaquets(void * destination, int numberOfBytes, int & bytesReceived);
+        PResult SendALL(void * data, int numberOfBytes);
+        PResult ReceiveALL(void * destination, int numberOfBytes);
+
         //getter
         SocketHandle GetHandle();
         IPVersion   GetIPVersion();
