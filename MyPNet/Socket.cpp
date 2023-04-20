@@ -129,7 +129,7 @@ MyPNet::PResult Socket::SetSocketOptions(SocketOptions option, WINBOOL value) {
         return P_Success;
     }
 
-    PResult Socket::SendPaquets(void *data, int numberOfBytes, int &bytesSent) {
+    PResult Socket::SendPaquets(const void *data, int numberOfBytes, int &bytesSent) {
         bytesSent = send(handle, (const char*)data, numberOfBytes, NULL);//last arg c'est un flag
         if (bytesSent == SOCKET_ERROR){
             int error = WSAGetLastError();
@@ -155,7 +155,7 @@ MyPNet::PResult Socket::SetSocketOptions(SocketOptions option, WINBOOL value) {
         return PResult::P_Success;
     }
 
-    PResult Socket::SendALL(void *data, int numberOfBytes) {
+    PResult Socket::SendALL(const void *data, int numberOfBytes) {
         int totalBytesSent = 0;
         while (totalBytesSent < numberOfBytes){
             int bytesRemaining = numberOfBytes - totalBytesSent;

@@ -11,6 +11,7 @@
 #include "IPEndpoint.h"
 #include "winsock2.h"
 #include "iostream"
+#include "Settings.h"
 namespace MyPNet{
     class Socket {
     private:
@@ -28,9 +29,9 @@ namespace MyPNet{
         PResult Listen(IPEndpoint endpoint, int backlog = 5);
         PResult AcceptConnection(Socket & outSocket);
         PResult ConnectTo(IPEndpoint endpoint);
-        PResult SendPaquets(void * data, int numberOfBytes, int & bytesSent);
+        PResult SendPaquets(const void * data, int numberOfBytes, int & bytesSent);
         PResult ReceivePaquets(void * destination, int numberOfBytes, int & bytesReceived);
-        PResult SendALL(void * data, int numberOfBytes);
+        PResult SendALL(const void * data, int numberOfBytes);
         PResult ReceiveALL(void * destination, int numberOfBytes);
 
         //getter
