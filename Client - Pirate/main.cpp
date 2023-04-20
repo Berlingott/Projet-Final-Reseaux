@@ -4,6 +4,31 @@
 #include "iostream"
 #include "../MyPNet/IncludeMe.h"
 
+bool ProcessPacket(MyPNet::Packet & packet){
+    switch (packet.GetPacketType()) {
+        case MyPNet::PacketType::PT_ChatMessage: {
+
+            std::string message;
+            packet >> message;
+            std::cout << message;
+            break;
+            }
+        case MyPNet::PacketType::PT_IntegerArray:{
+            uint32_t arraySize = 0;
+            packet >> arraySize;
+            for (uint32_t i = 0; i < arraySize; i++) {
+                uint32_t element=0;
+                packet >> element;
+                std::cout << element;
+            }
+            break;
+        }
+        default:
+            return false;
+    }
+    return true;
+}
+
 int main(){ // Main client -- cible
     if(MyPNet::Network::Initialize()){
 
@@ -23,15 +48,13 @@ int main(){ // Main client -- cible
                     uint32_t  a(3), b(2), c(1);
                     MyPNet::Packet packet;
                     while(true){
-                        MyPNet::PResult result = connectionACible.ReceivePaquets(packet);
-
-                        if(result != MyPNet::PResult::P_Success){
+                         MyPNet::PResult result = connectionACible.ReceivePaquets(packet);
+                         if (result != MyPNet::PResult::P_Success){
+                             break;
+                         }
+                        if (!ProcessPacket(packet)){
                             break;
                         }
-                        std::string a;
-                        std::string b;
-                        packet >> a >> b ;
-                        std::cout << a << b;
                     }
                 }
             }

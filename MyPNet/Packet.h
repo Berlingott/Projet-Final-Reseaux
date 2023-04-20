@@ -9,11 +9,16 @@
 #include <winsock2.h>
 #include <cstdint>
 #include <string>
+#include "PacketType.h"
 
 namespace MyPNet{
     class Packet{
     private:
     public:
+        Packet(PacketType packettype = PacketType::PT_invalid);
+        PacketType GetPacketType();
+        void AssignPacketType(PacketType packettype);
+
         //fonctions
         void Clear();
         void append(const void * data, uint32_t size);
@@ -25,8 +30,9 @@ namespace MyPNet{
         Packet& operator >> (std::string & data);
 
         //variables
-        std::vector<char> buffer;
+
         uint32_t extractionOffset = 0;
+        std::vector<char> buffer;
     };
 }
 #endif //MYPNET_PACKET_H

@@ -190,8 +190,8 @@ MyPNet::PResult Socket::SetSocketOptions(SocketOptions option, WINBOOL value) {
     }
 
     PResult Socket::SendPaquets(Packet &packet) {
-        uint32_t encodedPacketSize = htonl(packet.buffer.size());
-        PResult result = SendALL(&encodedPacketSize, sizeof(uint32_t));
+        uint16_t encodedPacketSize = htons(packet.buffer.size());
+        PResult result = SendALL(&encodedPacketSize, sizeof(uint16_t));
 
         if (result != PResult::P_Success){
             return PResult::P_FAILED;
@@ -208,14 +208,15 @@ MyPNet::PResult Socket::SetSocketOptions(SocketOptions option, WINBOOL value) {
 
     PResult Socket::ReceivePaquets(Packet &packet) {
         packet.Clear();
-        uint32_t encodedSize = 0;
-        PResult result = ReceiveALL(&encodedSize, sizeof(uint32_t));
+        uint16_t encodedSize = 0;
+        PResult result = ReceiveALL(&encodedSize, sizeof(uint16_t));
 
         if (result != PResult::P_Success){
             return PResult::P_FAILED;
         }
 
-        uint32_t bufferSize = ntohl(encodedSize);
+        uint16_t bufferSize = ntohs(encodedSize);
+
         packet.buffer.resize(bufferSize);
         result = ReceiveALL(&packet.buffer[0], bufferSize);
 

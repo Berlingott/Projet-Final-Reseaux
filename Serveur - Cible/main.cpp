@@ -13,18 +13,22 @@ int main(){ // Main client -- cible
                 std::cout <<"Nouvelle connexion établie vers le malfrat!" << std::endl;
 
                 //send paquets
-                uint32_t  a, b, c;
-                a=4;
-                b=6;
-                c=9;
-                MyPNet::Packet packet;
-                packet << std::string ("Bonjour");
-                packet << std::string ("hello");
+
+                MyPNet::Packet stringpacket(MyPNet::PacketType::PT_ChatMessage), intpacket(MyPNet::PacketType::PT_IntegerArray);
+                stringpacket << std::string ("Bonjour");
+                uint32_t arraySize = 4;
+                uint32_t integerArray[4] = {1,2,3,4};
+                intpacket << arraySize;
+
 
                 while(true){
-                    MyPNet::PResult result = socket.SendPaquets(packet);
-                    if (result != MyPNet::PResult::P_Success){
-                        break;
+                    MyPNet::PResult result;
+                    std::cout <<"envoie" << std::endl;
+
+                    if(rand()%2==0){
+                        result = socket.SendPaquets(stringpacket);
+                    } else{
+                        result = socket.SendPaquets(intpacket);
                     }
                 }
 
