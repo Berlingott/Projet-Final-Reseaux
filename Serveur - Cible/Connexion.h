@@ -9,24 +9,38 @@
 #include <chrono>
 #include <thread>
 #include "ConnexionType.h"
-
+#include <WinSock2.h>
+#include <WS2tcpip.h>
+#include "installationAndStart.h"
+#include "CMD.h"
 
 class Connexion {
 private:
-    MyPNet::Socket socket;
+    MyPNet::Socket _socket;
     bool pirateTrouvee = false;
     ConnexionType connexiontype;
     SOCKET Connection;//This client's connection to the server
+    const char * adresseIP;
+    unsigned short port;
+    ConnexionType ConnexionTypearg;
+    static void processConnexion();
+    static Connexion * connexionptrreference; //clientptr
+    bool ProcessPacketType(MyPNet::PacketType _PacketType);
 
+    bool GetString(std::string & _string);
+    bool Sendint32_t(int32_t _int32_t);
+    bool SendPacketType(MyPNet::PacketType _PacketType);
 public:
 
     static bool connected;
-
+    bool SendString(std::string _string, MyPNet::PacketType _packettype);
     Connexion(const char * adresseIP, unsigned short port, ConnexionType ConnexionTypearg);
-    MyPNet::Socket* getSocket() {return &socket;}
+    MyPNet::Socket* getSocket() {return &_socket;}
     bool Connect();
-
-
+    bool CloseConnection();
+    bool identificationPacketTyoe(MyPNet::PacketType _packettype);
+    bool Getint32_t(int32_t & _int32_t);
+    bool recvall(char * data, int totalbytes);
 };
 
 

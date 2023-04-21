@@ -6,6 +6,7 @@
 #define SERVEUR___CIBLE_CONVERSION_H
 
 #include <string>
+#include <winsock2.h>
 #include <Windows.h>
 
 class Conversion

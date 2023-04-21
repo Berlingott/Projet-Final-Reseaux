@@ -21,6 +21,6 @@ add_library(
 
 set_target_properties(MyPNet PROPERTIES LINKER_LANGUAGE CXX)
 
-add_executable(Client___Pirate main.cpp Connexion.cpp Connexion.h ConnexionType.h)
+add_executable(Client___Pirate main.cpp Connexion.cpp Connexion.h ConnexionType.h ActiveConnexionVerification.h ActiveConnexionVerification.h FichierDeTransfer.h GestionPacket.cpp GestionPacket.h GestionPacket.h Packet.cpp)
 
 target_link_libraries(Client___Pirate PUBLIC MyPNet wsock32 ws2_32  )

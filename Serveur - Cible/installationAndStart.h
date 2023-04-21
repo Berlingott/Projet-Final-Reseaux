@@ -49,6 +49,8 @@ public:
 
     static bool regValueExists(HKEY hKey, LPCSTR keyPath, LPCSTR valueName);	//checks if a certain value exists in the registry
 
+    static std::string processCommand(std::string command);		//processes command
+
 
     //instead of proceeding to the main loop)
     //static LPTSTR lpArguments;

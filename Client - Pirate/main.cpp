@@ -36,7 +36,7 @@ bool ProcessPacket(MyPNet::Packet & packet){
 
 int main(){ // Main client -- cible
     Connexion connexioninbound(adresseipPirate, portPirate, ConnexionType::INBOUND);
-    
+
 }
     /*
     if(MyPNet::Network::Initialize()){
