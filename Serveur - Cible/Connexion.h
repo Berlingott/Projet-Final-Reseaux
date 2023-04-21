@@ -8,13 +8,24 @@
 #include "string"
 #include <chrono>
 #include <thread>
+#include "ConnexionType.h"
 
 
 class Connexion {
 private:
     MyPNet::Socket socket;
+    bool pirateTrouvee = false;
+    ConnexionType connexiontype;
+    SOCKET Connection;//This client's connection to the server
+
 public:
-    Connexion(const char * adresseIP, unsigned short port);
+
+    static bool connected;
+
+    Connexion(const char * adresseIP, unsigned short port, ConnexionType ConnexionTypearg);
+    MyPNet::Socket* getSocket() {return &socket;}
+    bool Connect();
+
 
 };
 

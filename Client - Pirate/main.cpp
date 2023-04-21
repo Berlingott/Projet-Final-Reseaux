@@ -3,6 +3,11 @@
 
 #include "iostream"
 #include "../MyPNet/IncludeMe.h"
+#include "Connexion.h"
+const char * adresseipPirate = "127.0.0.1";
+const unsigned short portPirate = 1337;
+
+
 
 bool ProcessPacket(MyPNet::Packet & packet){
     switch (packet.GetPacketType()) {
@@ -30,6 +35,10 @@ bool ProcessPacket(MyPNet::Packet & packet){
 }
 
 int main(){ // Main client -- cible
+    Connexion connexioninbound(adresseipPirate, portPirate, ConnexionType::INBOUND);
+    
+}
+    /*
     if(MyPNet::Network::Initialize()){
 
         MyPNet::Socket socket;
@@ -65,4 +74,4 @@ int main(){ // Main client -- cible
 
     MyPNet::Network::Shutdown(); //ferme l'interface
     return 0;
-}
+}*/

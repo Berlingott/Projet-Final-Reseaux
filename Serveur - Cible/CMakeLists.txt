@@ -21,7 +21,7 @@ add_library(
 
 set_target_properties(MyPNet PROPERTIES LINKER_LANGUAGE CXX)
 #target_include_directories( MyPNet PUBLIC ../MyPNet)
-add_executable(Serveur___Cible main.cpp  Client.h Client.cpp PacketType.h Settings.h Settings.cpp OperationState.h installationAndStart.cpp installationAndStart.h Conversion.cpp Conversion.h Connexion.cpp Connexion.h) #todo add cmd file
+add_executable(Serveur___Cible main.cpp PacketType.h Settings.h Settings.cpp OperationState.h installationAndStart.cpp installationAndStart.h Conversion.cpp Conversion.h Connexion.cpp Connexion.h ConnexionType.h) #todo add cmd file
 
 target_link_libraries(Serveur___Cible PUBLIC MyPNet wsock32 ws2_32 )
 

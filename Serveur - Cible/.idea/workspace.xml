@@ -22,13 +22,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="527e96f3-8d11-4d81-b667-500942689616" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Connexion.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Connexion.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyPNet/PacketType.h" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/PacketType.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client - Pirate/Connexion.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client - Pirate/Connexion.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Client - Pirate/ConnexionType.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../MyPNet/SocketSendAndReceive.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ConnexionType.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmdRedirect.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmdRedirect.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client - Pirate/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client - Pirate/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Client - Pirate/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Client - Pirate/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyPNet/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyPNet/Socket.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/Socket.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMD.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMD.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Settings.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Settings.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Settings.h" beforeDir="false" afterPath="$PROJECT_DIR$/Settings.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Connexion.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Connexion.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Connexion.h" beforeDir="false" afterPath="$PROJECT_DIR$/Connexion.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,7 +76,7 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "C:/Users/Berlingot/Desktop/Lilith",
+    "last_opened_file_path": "C:/Users/Berlingot/Desktop/Projet-Final-Reseaux/Serveur - Cible",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -74,6 +86,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Berlingot\Desktop\Projet-Final-Reseaux\Serveur - Cible" />
+    </key>
+  </component>
   <component name="RunManager" selected="CMake Application.Serveur___Cible">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
@@ -109,7 +126,7 @@
       <workItem from="1681868013226" duration="409000" />
       <workItem from="1681872097545" duration="27562000" />
       <workItem from="1682006803319" duration="4666000" />
-      <workItem from="1682012179342" duration="12027000" />
+      <workItem from="1682012179342" duration="18918000" />
     </task>
     <servers />
   </component>
