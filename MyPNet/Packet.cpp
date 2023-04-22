@@ -2,6 +2,7 @@
 // Created by Berlingot on 2023-04-19.
 //
 #include "Packet.h"
+#include <Windows.h>
 
 void MyPNet::Packet::Clear() {
     buffer.resize(sizeof(PacketType));
@@ -60,4 +61,23 @@ void MyPNet::Packet::AssignPacketType(MyPNet::PacketType packettype) {
     PacketType * packetTypePtr = reinterpret_cast<PacketType*>(&buffer[0]);
     *packetTypePtr = static_cast<PacketType>(htons(packettype));
 
+}
+
+
+MyPNet::Packet::Packet()
+{
+
+}
+
+MyPNet::Packet::Packet(char * _buffer, int _size)
+{
+    bufferL = _buffer;
+    size = _size;
+}
+
+MyPNet::Packet::Packet(const Packet & p) //Allocate new block for buffer
+{
+    size = p.size;
+    bufferL = new char[size];
+    memcpy(bufferL, &p.buffer, size);
 }

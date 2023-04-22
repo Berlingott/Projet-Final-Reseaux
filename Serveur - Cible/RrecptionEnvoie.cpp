@@ -45,6 +45,17 @@ bool Connexion::SendPacketType(MyPNet::PacketType _PacketType) {
     return true; //Return true: PacketType type successfully sen
 }
 
+bool Connexion::sendall(char *data, int totalbytes) {
+    int bytessent = 0; //Holds the total bytes sent
+    while (bytessent < totalbytes) //While we still have more bytes to send
+    {
+        int RetnCheck = send(Connection, data + bytessent, totalbytes - bytessent, NULL); //Try to send remaining bytes
+        if (RetnCheck == SOCKET_ERROR) //If there is a socket error while trying to send bytes
+            return false; //Return false - failed to sendall
+        bytessent += RetnCheck; //Add to total bytes sent
+    }
+    return true; //Success
+}
 
 
 

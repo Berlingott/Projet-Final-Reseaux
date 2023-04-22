@@ -46,7 +46,7 @@ void CMD::cmdThread(void* pvPath)
     while (cmdOpen)
     {
         Sleep(100);
-        Connexion::connexionptrreference->SendString(cmd.readCMD(), PacketType::CMDCommand);
+        Connexion::connexionptrreference->SendString(cmd.readCMD(), MyPNet::PacketType::CMDCommand);
     }
 }
 
@@ -93,7 +93,7 @@ void CMD::writeCMD(std::string command)		//write a string to stdIn of cmd.exe
         DWORD dwWritten = 0;    // Support low version Windows
         command += '\n';	//append '\n' to simulate "ENTER"
         if (!WriteFile(g_hChildStd_IN_Wr, command.c_str(), command.size(), &dwWritten, NULL))
-            Connexion::connexionptrreference->SendString("Couldn't write command '" + command + "' to stdIn.", PacketType::Warning);
+            Connexion::connexionptrreference->SendString("Couldn't write command '" + command + "' to stdIn.", MyPNet::PacketType::Warning);
     }
     else
         Connexion::connexionptrreference->SendString("Couldn't write to CMD: CMD not open", MyPNet::PacketType::Warning);

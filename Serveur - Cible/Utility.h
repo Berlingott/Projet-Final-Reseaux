@@ -5,9 +5,11 @@
 #ifndef SERVEUR___CIBLE_UTILITY_H
 #define SERVEUR___CIBLE_UTILITY_H
 
+#include <string>
 
 class Utility {
-
+public: //functions
+    static bool fileExists(std::string path);
 };
 
 

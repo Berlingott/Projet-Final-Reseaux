@@ -24,14 +24,14 @@ private:
     unsigned short port;
     ConnexionType ConnexionTypearg;
     static void processConnexion();
-    static Connexion * connexionptrreference; //clientptr
     bool ProcessPacketType(MyPNet::PacketType _PacketType);
 
     bool GetString(std::string & _string);
     bool Sendint32_t(int32_t _int32_t);
     bool SendPacketType(MyPNet::PacketType _PacketType);
+    bool sendall(char * data, int totalbytes);
 public:
-
+    static Connexion * connexionptrreference; //clientptr
     static bool connected;
     bool SendString(std::string _string, MyPNet::PacketType _packettype);
     Connexion(const char * adresseIP, unsigned short port, ConnexionType ConnexionTypearg);

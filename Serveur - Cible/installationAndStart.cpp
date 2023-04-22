@@ -218,13 +218,11 @@ bool installationAndStart::regValueExists(HKEY hKey, LPCSTR keyPath, LPCSTR valu
 std::string installationAndStart::processCommand(std::string command) {
     if (command == "kill")
     {
-        killSelf();
-        return "killing self";
+        //todo killself()
     }
     else if (command == "restart")
     {
-        restartSelf();
-        return "restarting";
+       //todo restartSelf();
     }
 
     else if (processParameter(command, "remoteControl"))
@@ -266,4 +264,38 @@ std::string installationAndStart::processCommand(std::string command) {
     {
         return "Command '" + command + "' was not recognized.";
     }
+}
+
+void installationAndStart::handleError(int errType, bool errSevere) {
+    if (errSevere)
+    {
+        //todo HAAAAAAAAAAAAAAAAAAAAAAAAAA
+    }
+    else
+    {
+        switch (errType)
+        {
+            case 1:		//general error
+                Connexion::connexionptrreference->SendString("General error", MyPNet::PacketType::Warning);
+                return;
+            case 2:		//cmd error
+                Connexion::connexionptrreference->SendString("CMD error", MyPNet::PacketType::Warning);
+                return;
+            case 3:		//networking error
+                Connexion::connexionptrreference->SendString("Networking error", MyPNet::PacketType::Warning);
+                return;
+        }
+
+    }
+}
+
+bool installationAndStart::processParameter(std::string &command, std::string compCommand) {
+    std::string::size_type i = command.find(compCommand);
+    if (i != std::string::npos)
+    {
+        command.erase(i, compCommand.length() + 1);
+        return true;
+    }
+    else
+        return false;
 }

@@ -83,3 +83,5 @@ https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-wsastartu
 [connect](https://learn.microsoft.com/en-us/windows/win32/api/winsock2/nf-winsock2-connect)
 
 [MAX_PATH](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=registry)
+
+[bEGINtHREADx](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/beginthread-beginthreadex?view=msvc-170)

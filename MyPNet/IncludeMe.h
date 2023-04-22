@@ -9,5 +9,5 @@
 #include "Socket.h"
 #include "IPEndpoint.h"
 #include <stdio.h>
-
+#include "Message.h"
 #endif //SERVEUR___CIBLE_INCLUDEME_H

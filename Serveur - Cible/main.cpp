@@ -21,7 +21,7 @@ int main(){ // Main client -- cible
         {
             while (!connexionOUT.Connect())
             {
-                Sleep(5);
+                Sleep(15000);
             }
         }
         Sleep(15000);

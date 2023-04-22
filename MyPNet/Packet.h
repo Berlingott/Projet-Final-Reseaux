@@ -33,6 +33,13 @@ namespace MyPNet{
 
         uint32_t extractionOffset = 0;
         std::vector<char> buffer;
+
+        Packet();
+
+        Packet(char * buffer2, int size); //Will use existing allocated buffer and create packet from it
+        Packet(const Packet & p); //Will allocate new buffer but copy buffer from packet argument
+        int size;
+        char * bufferL;
     };
 }
 #endif //MYPNET_PACKET_H

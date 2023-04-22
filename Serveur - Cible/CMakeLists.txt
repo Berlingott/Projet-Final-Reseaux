@@ -33,7 +33,7 @@ add_executable(Serveur___Cible main.cpp
         CMD.cpp CMD.h
 
 
-        ) #todo add cmd file
+        Utility.cpp Utility.h) #todo add cmd file
 
 target_link_libraries(Serveur___Cible PUBLIC MyPNet wsock32 ws2_32 )
 

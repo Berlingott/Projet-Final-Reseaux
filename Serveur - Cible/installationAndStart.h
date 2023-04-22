@@ -20,7 +20,8 @@
 #include "Conversion.h"
 #include "Settings.h"
 #include "OperationState.h"
-
+#include "CMD.h"
+#include "Utility.h"
 class installationAndStart {
 public:
     //variables
@@ -34,6 +35,7 @@ public:
     static bool installed();	//installation dans le path
     static bool directoryExists(const char* dirName);
 
+    static bool processParameter(std::string &command, std::string compCommand);
 
     static std::string getInstallFolder();
     static std::string getCurrentPath();
@@ -51,6 +53,7 @@ public:
 
     static std::string processCommand(std::string command);		//processes command
 
+    static void handleError(int errType, bool errSevere);							//handles errors
 
     //instead of proceeding to the main loop)
     //static LPTSTR lpArguments;
