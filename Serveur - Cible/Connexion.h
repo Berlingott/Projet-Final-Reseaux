@@ -20,7 +20,8 @@ private:
     bool pirateTrouvee = false;
     ConnexionType connexiontype;
     SOCKET Connection;//This client's connection to the server
-    const char * adresseIP;
+    SOCKADDR_IN adresseIP;
+    const char * adresseIPm;
     unsigned short port;
     ConnexionType ConnexionTypearg;
     static void processConnexion();

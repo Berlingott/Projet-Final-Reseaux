@@ -22,33 +22,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="527e96f3-8d11-4d81-b667-500942689616" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Client - Pirate/General.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Client - Pirate/General.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MyPNet/Message.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MyPNet/Message.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Utility.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Utility.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client - Pirate/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Client - Pirate/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Client - Pirate/Connexion.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Client - Pirate/Connexion.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client - Pirate/Connexion.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Client - Pirate/Connexion.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client - Pirate/GestionPacket.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Client - Pirate/GestionPacket.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client - Pirate/GestionPacket.h" beforeDir="false" afterPath="$PROJECT_DIR$/../Client - Pirate/GestionPacket.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client - Pirate/Packet.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Client - Pirate/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Client - Pirate/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyPNet/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyPNet/IncludeMe.h" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/IncludeMe.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyPNet/Packet.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/Packet.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyPNet/Packet.h" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/Packet.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/CMD.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Connexion.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Connexion.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Connexion.h" beforeDir="false" afterPath="$PROJECT_DIR$/Connexion.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RrecptionEnvoie.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/RrecptionEnvoie.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/installationAndStart.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/installationAndStart.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/installationAndStart.h" beforeDir="false" afterPath="$PROJECT_DIR$/installationAndStart.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Settings.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Settings.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +111,7 @@
       <workItem from="1681868013226" duration="409000" />
       <workItem from="1681872097545" duration="27562000" />
       <workItem from="1682006803319" duration="4666000" />
-      <workItem from="1682012179342" duration="35617000" />
+      <workItem from="1682012179342" duration="38971000" />
     </task>
     <servers />
   </component>
@@ -156,12 +134,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Connexion.cpp</url>
-          <line>107</line>
+          <line>111</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/Connexion.cpp</url>
-          <line>36</line>
+          <line>40</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>

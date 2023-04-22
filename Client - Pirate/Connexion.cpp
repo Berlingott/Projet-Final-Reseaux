@@ -417,7 +417,7 @@ void Connexion::HandleInput() {
             if (General::processParameter(userinput, "connect"))
             {
                 inputInt = atoi(userinput.c_str());
-                int tempInt = activeconnection .size() - 1;
+                int tempInt = activeconnection.size() - 1;
                 if (inputInt > tempInt)
                     General::outputMsg("Session doesn't exist.", 2);
                 else

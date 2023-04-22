@@ -12,7 +12,7 @@ bool Connexion::connected;
 
 Connexion::Connexion(const char * adresseIP, unsigned short port, ConnexionType ConnexionTypearg) {
     connexiontype = ConnexionTypearg;
-    this->adresseIP = adresseIP;
+    this->adresseIPm = adresseIP;
     this->port = port;
     //Démarrage des services necessaires
     if(MyPNet::Network::Initialize()){
@@ -26,6 +26,10 @@ Connexion::Connexion(const char * adresseIP, unsigned short port, ConnexionType 
                     std::cout << "Connexion établie" << std::endl;
                     connected = true;
                     connexionptrreference = this;
+                    this->adresseIP.sin_addr.s_addr = inet_addr("127.0.0.1"); //Broadcast locally
+                    this->adresseIP.sin_port = htons(13337); //Port
+                    this->adresseIP.sin_family = AF_INET; //IPv4 Socket
+
                     return;
                 } else { std::cout << std::endl << "Tentative de connexion échoué." << std::endl << "Nouvelle tentative dans 5 secondes" << std::endl; sleep(5);}
             }
