@@ -46,7 +46,7 @@ bool Connexion::Connect() {
         return false;
     }
 
-    std::cout << "Connected!" << std::endl;
+    std::cout << "Session connectée!" << std::endl;
     _beginthreadex(NULL, NULL, (_beginthreadex_proc_type)processConnexion, NULL, NULL, NULL); //Create the client thread that will receive any data that the server sends.
     connected = true;
     return true;
@@ -58,11 +58,12 @@ void Connexion::processConnexion() {
     MyPNet::PacketType packettype;
 
     while (true)
-    {
-        if (!connexionptrreference->identificationPacketTyoe(packettype)) //Get PacketType type
-            break; //If there is an issue getting the PacketType type, exit this loop
-        if (!connexionptrreference->ProcessPacketType(packettype)) //Process PacketType (PacketType type)
-            break; //If there is an issue processing the PacketType, exit this loop
+    {if (!connexionptrreference->identificationPacketTyoe(packettype)){std::cout<<"1"; //Get PacketType type
+           break; //If there is an issue getting the PacketType type, exit this loop
+            }
+        if (!connexionptrreference->ProcessPacketType(packettype)){std::cout<<"2"; //Process PacketType (PacketType type)
+           break; //If there is an issue processing the PacketType, exit this loop
+        }
     }
     connected = false;
     //std::cout << "Lost connection to the server." << std::endl;
@@ -81,7 +82,7 @@ bool Connexion::CloseConnection() {
     return true;
 }
 
-bool Connexion::identificationPacketTyoe(MyPNet::PacketType _packettype) {
+bool Connexion::identificationPacketTyoe(MyPNet::PacketType & _packettype) {
     int packettype;
     if (!Getint32_t(packettype))//Try to receive PacketType type... If PacketType type fails to be recv'd
         return false; //Return false: PacketType type not successfully received
@@ -98,6 +99,7 @@ bool Connexion::Getint32_t(int32_t &_int32_t) {
 
 bool Connexion::recvall(char *data, int totalbytes) {
     int bytesreceived = 0; //Holds the total bytes received
+
     while (bytesreceived < totalbytes) //While we still have more bytes to recv
     {
         int RetnCheck = recv(Connection, data + bytesreceived, totalbytes - bytesreceived, NULL); //Try to recv remaining bytes

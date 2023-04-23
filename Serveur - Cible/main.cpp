@@ -17,11 +17,11 @@ int main(){ // Main client -- cible
 
     while (true)
     {
-        if (connexionOUT.connected)
+        if (connexionOUT.connected == true)
         {
-            while (!connexionOUT.Connect())
+            while (connexionOUT.Connect() == false)
             {
-                Sleep(15000);
+                Sleep(150000);
             }
         }
         Sleep(15000);

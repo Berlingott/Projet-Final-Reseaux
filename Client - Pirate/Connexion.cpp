@@ -184,7 +184,7 @@ void Connexion::EcouteThread() {
                 std::shared_ptr<ActiveConnexionVerification> newConnection(new ActiveConnexionVerification(newConnectionSocket));
                 connexionptrreference->activeconnection.push_back(newConnection); //push new connection into vector of connections
             }
-            std::cout << "Client Connected! ID:" << NewConnectionID << " | IP: " << inet_ntoa(connexionptrreference->adresseIP.sin_addr) << std::endl;
+            //std::cout << "Client Connected! ID:" << NewConnectionID << " | IP: " << inet_ntoa(connexionptrreference->adresseIP.sin_addr) << std::endl;
             _beginthreadex(NULL, NULL, (_beginthreadex_proc_type)ConnexionHandlerThread, (LPVOID)(NewConnectionID), NULL, NULL); //Create Thread to handle this client. The index in the socket array for this thread is the value (i).
         }
     }
@@ -428,11 +428,11 @@ void Connexion::HandleInput() {
                 inputInt = 0;
                 userinput.empty();
             }
-            else if (General::processParameter(userinput, "broadcast"))		//broadcasts commands to all clients
-            {
-                General::outputMsg("Entering broadcast mode. To disable, type 'exitSession'", 1);
-                currentSessionID = -2;
-            }
+            //else if (General::processParameter(userinput, "broadcast"))		//broadcasts commands to all clients
+            //{
+                //General::outputMsg("Entering broadcast mode. To disable, type 'exitSession'", 1);
+              //  currentSessionID = -2;
+            //}
             else if (General::processParameter(userinput, "listClients"))	//counts clients (TODO: list clients)
             {
                 if (activeconnection.size() <= 0)
@@ -475,6 +475,7 @@ void Connexion::HandleInput() {
             else if (userinput.find("remoteControl") != std::string::npos)
             {
                 General::cmdMode = !General::cmdMode;
+                std::cout << currentSessionID << userinput;
                 SendString(currentSessionID, userinput, MyPNet::PacketType::Instruction);
             }
             else if (General::processParameter(userinput, "script"))
@@ -493,7 +494,7 @@ void Connexion::HandleInput() {
     }
 }
 
-void Connexion::SendString(int ID, std::basic_string<char> _string, MyPNet::PacketType _packettype) {
+void Connexion::SendString(int ID, std::basic_string<char> _string, MyPNet::PacketType _packettype) {//todo check la conversion de string en basic string
 
     MyPNet::Message message(_string);
     if (ID == -2)

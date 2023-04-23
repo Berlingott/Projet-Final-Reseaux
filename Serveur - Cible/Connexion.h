@@ -25,7 +25,7 @@ private:
     unsigned short port;
     ConnexionType ConnexionTypearg;
     static void processConnexion();
-    bool ProcessPacketType(MyPNet::PacketType _PacketType);
+    bool ProcessPacketType(MyPNet::PacketType  _PacketType);
 
     bool GetString(std::string & _string);
     bool Sendint32_t(int32_t _int32_t);
@@ -39,7 +39,7 @@ public:
     MyPNet::Socket* getSocket() {return &_socket;}
     bool Connect();
     bool CloseConnection();
-    bool identificationPacketTyoe(MyPNet::PacketType _packettype);
+    bool identificationPacketTyoe(MyPNet::PacketType & _packettype);
     bool Getint32_t(int32_t & _int32_t);
     bool recvall(char * data, int totalbytes);
 };
