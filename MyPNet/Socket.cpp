@@ -1,5 +1,5 @@
 //
-// Created by Berlingot on 2023-04-19.
+// Utilisation de socket dans MyPNET.. causait problème, utilisation de socket directement dans les programme avec winsock dans la cible et le server
 //
 
 #include "Socket.h"

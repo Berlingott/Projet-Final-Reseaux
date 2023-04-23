@@ -2,7 +2,7 @@
 // Created by Berlingot on 2023-04-19.
 //
 #include "IPEndpoint.h"
-
+//getter
 MyPNet::IPVersion MyPNet::IPEndpoint::get_ipversion() {
     return ipversion;
 }
@@ -22,7 +22,7 @@ unsigned short MyPNet::IPEndpoint::get_port() {
 std::string MyPNet::IPEndpoint::get_ipstring() {
     return ip_string;
 }
-
+//constructeur
 MyPNet::IPEndpoint::IPEndpoint(const char *ip, unsigned short port) {
     this->port = port;
 
@@ -52,22 +52,16 @@ MyPNet::IPEndpoint::IPEndpoint(const char *ip, unsigned short port) {
             // host_addr->sin_addr.S_un.S_addr;
             ip_string.resize(16);
             inet_ntop(AF_INET, &host_addr->sin_addr.S_un.S_addr, &ip_string[0], 16);
-
             hostname = ip;
             ULONG ip_long = host_addr->sin_addr.S_un.S_addr;
             ip_bytes.resize(sizeof(ULONG));
-
             memcpy(&ip_bytes[0],&ip_long,sizeof(ULONG));
-
             ipversion = IPVersion::IPv4;
-
             freeaddrinfo(hostinfo);
 
             return;
         }
     }
-
-
 
 
 }
@@ -78,8 +72,6 @@ sockaddr_in MyPNet::IPEndpoint::GetSockaddrInIPv4() {
     addr.sin_family = AF_INET;
     memcpy(&addr.sin_addr, &ip_bytes[0],sizeof(ULONG));
     addr.sin_port = htons(port); // hosttonetwork
-
-
     return addr;
 }
 
@@ -102,15 +94,13 @@ void MyPNet::IPEndpoint::PrintAllInfo() {
     std::cout << "Host:" << hostname << std::endl;
     std::cout << "ip:"<< ip_string << std::endl;
     std::cout << "port: "<<port << std::endl;
-    std::cout << "Bytes IP: "<< std::endl;
+
+}
 /*
     for (auto & digit : ip_bytes ) {
         std::cout << (int)digit << std::endl;
     }
 */
-
-}
-
 /* https://learn.microsoft.com/en-us/windows/win32/api/winsock2/ns-winsock2-in_addr
 
 struct in_addr {

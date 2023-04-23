@@ -27,7 +27,7 @@ set_target_properties(MyPNet PROPERTIES LINKER_LANGUAGE CXX)
 add_executable(Client___Pirate main.cpp
         Connexion.cpp Connexion.h
         ConnexionType.h
-        ActiveConnexionVerification.h ActiveConnexionVerification.h
+        ActiveConnexionVerification.h
         FichierDeTransfer.h GestionPacket.cpp
         GestionPacket.h GestionPacket.h
         General.cpp General.h)

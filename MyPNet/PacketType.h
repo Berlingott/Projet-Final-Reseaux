@@ -1,5 +1,5 @@
 //
-// Created by Berlingot on 2023-04-19.
+// tout les type de packet qui nous permettrons d'identifier le type de packet envoyé.
 //
 
 #ifndef MYPNET_PACKETTYPE_H

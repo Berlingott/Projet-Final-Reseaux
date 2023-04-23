@@ -8,14 +8,11 @@
 #include "ConnexionType.h"
 #include "GestionPacket.h"
 #include "ActiveConnexionVerification.h"
-
 #include <unistd.h>
-
-
-#include <WinSock2.h> //For win sockets
-#include <string> //For std::string
-#include <iostream> //For std::cout, std::endl
-#include <vector> //for std::vector
+#include <WinSock2.h>
+#include <string>
+#include <iostream>
+#include <vector>
 #include <memory>
 #include "General.h"
 
@@ -43,23 +40,22 @@ private:
 
     GestionPacket gestionpacket;
     static Connexion * connexionptrreference;//serverptr
-    std::vector<std::shared_ptr<ActiveConnexionVerification>> activeconnection; //connections	std::vector<std::shared_ptr<Connection>> connections;
+    std::vector<std::shared_ptr<ActiveConnexionVerification>> activeconnection; //std:
 
     bool sendallpack(int ID, char * data, int totalbytes);//sendall
     bool recvallpack(int ID, char * data, int totalbytes);//recvall
-    std::mutex connectionMgr_mutex; //mutex for managing connections (used when a client disconnects)
+    std::mutex connectionMgr_mutex;
     bool GetString(int ID, std::string & _string);
     bool HandleSendFile(int ID);
     bool SendPacketType(int ID, MyPNet::PacketType _packettype);
 
     void SendString(int ID, std::basic_string<char> _string, MyPNet::PacketType _packettype);///changement
 
-    static void EcouteThread(); //	static void ListenerThread();
+    static void EcouteThread();
     int currentSessionID;
 
     bool listenning();
 
-    void handleScript(std::string script);
 
 public:
     //constructeur
@@ -70,12 +66,9 @@ public:
     bool GetPacketType(int ID, MyPNet::PacketType & _packettype);
     bool Sendint32_t(int ID, int32_t _int32_t);
     bool Getint32_t(int ID, int32_t & _int32_t);
-    void DisconnectClient(int ID); //Called to properly disconnect and clean up a client (if possible)
+    void DisconnectClient(int ID);
     void HandleInput();
 
 };
-
-
-
 
 #endif //CLIENT___PIRATE_CONNEXION_H

@@ -1,6 +1,6 @@
 //
-// Created by Berlingot on 2023-04-19.
-//
+// Resultat de certaines operation
+// on pourrait utilisé true false ou autre, simplemenet plus clair
 
 #ifndef MYPNET_PRESULT_H
 #define MYPNET_PRESULT_H

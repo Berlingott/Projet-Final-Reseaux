@@ -18,9 +18,8 @@ private:
     std::mutex mutex_packets;
 public:
     void Clear();
-    bool HasPendingPackets();
     void Append(MyPNet::Packet p);
-
+    bool PacketEnAttente();
     MyPNet::Packet Retrieve();
 };
 

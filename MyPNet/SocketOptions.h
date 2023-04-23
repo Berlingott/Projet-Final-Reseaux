@@ -7,7 +7,7 @@
 
 namespace MyPNet{
     enum SocketOptions{
-    TCP_NoDelay,//true - desactive algo de naggle
+    TCP_NoDelay,//true - desactive algo de naggle -
     };
 }
 

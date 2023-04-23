@@ -70,6 +70,8 @@ https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-wsastartu
 
 [inet_pton](https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-inet_pton)
 
+[lilith](https://github.com/werkamsus/Lilith)
+
 [memcopy](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/memcpy-wmemcpy?view=msvc-170)
 
 [getaddrinfo](https://learn.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfo)
@@ -85,3 +87,5 @@ https://learn.microsoft.com/en-us/windows/win32/api/winsock/nf-winsock-wsastartu
 [MAX_PATH](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=registry)
 
 [bEGINtHREADx](https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/beginthread-beginthreadex?view=msvc-170)
+
+[CMAKELIST](https://www.jetbrains.com/help/clion/cmakelists-txt-file.html)

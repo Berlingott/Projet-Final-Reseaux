@@ -1,6 +1,3 @@
-//
-// Created by Berlingot on 2023-04-21.
-//
 
 #ifndef SERVEUR___CIBLE_CMD_H
 #define SERVEUR___CIBLE_CMD_H

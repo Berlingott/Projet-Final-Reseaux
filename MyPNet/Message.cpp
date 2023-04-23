@@ -1,25 +1,37 @@
 //
-// Created by Berlingot on 2023-04-22.
-//
+// Les messages sont dans les packets
+//  Les messages sont ce qui seront envoyé par le socket
+// la premiere partie sert a identifier le type de packet
+// la deuxieme la longueur du reste du packet (longueur total - 2 premiers)
+// le reste de tailles variables, contient les instruction/messages
 
 #include <iostream>
 #include "Message.h"
 
 namespace MyPNet
 {
-    Message::Message(std::string msg)
-    {
+    Message::Message(std::string msg){
         message = msg;
     }
 
-    Packet Message::toPacket(PacketType _packettype)
-    {//Calculate total size of buffer for packet contents
+    Packet Message::toPacket(PacketType _packettype){
+        //CONSTITUTION D'UN PACKET
 
+        //----------int32_t----------//----------int32_t----------//----------int32_t  * * *       X N     * * *    int32_t----------//
+        //                           //                           //                   * * *       X N     * * *                     //
+        //         PacketType        //    Longueur du message N  //     char 0        * * *       X N     * * *    char n           //
+        //                           //                           //                   * * *       X N     * * *                     //
+
+        // la premiere partie sert a identifier le type de packet
+        // la deuxieme la longueur du reste du packet (longueur total - 2 premiers)
+        // le reste de tailles variables, contient les instruction/messages
+
+        //calcul de la grandeur du packet
         const int packetsize = sizeof(int32_t) * 2 + message.size() * sizeof(char);
-        //Create buffer big enough to hold all info for message
+
+        // creation d'un buffer pour la construction du message de la grandeur calculé
         char * buffer = new char[packetsize];
-        //Convert packet type (int32_t) to network byte order
-        int32_t packettype = _packettype;//todo uint32 en uint 32
+
         //Convert message size (int32_t) to network byte order
 
         int messagesize = message.size();
@@ -27,24 +39,15 @@ namespace MyPNet
         int32_t messagesize32 = (int32_t)messagesize;
 
 
-        buffer[0]=packettype;
-        buffer[1]=messagesize32;
+        buffer[0]=_packettype;
+        buffer[1]=(int32_t)messagesize32;
         for (int32_t i = 2; i < packetsize ; ++i) {
-            buffer[i]=message[i-2];
+            buffer[i]=(int32_t)message[i-2];
         }
+        //on construit un packet avec le message et le packet type
+        MyPNet::Packet nouveaupack(buffer, packetsize);
 
-
-
-        //Copy Packet Type to first 4 bytes of buffer
-       // memcpy(buffer, &packettype, sizeof(int32_t));
-       //Copy size to next 4 bytes of buffer
-        //memcpy(buffer + sizeof(int32_t), &messagesize32, sizeof(int32_t));
-        //Copy message to fill the rest of the buffer
-       // std::string monmessagetest = message.c_str();//todo string est tu en vie
-       //memcpy(buffer + sizeof(int32_t) * 2, message.c_str(), message.size() * sizeof(char));
-
-        MyPNet::Packet p(buffer, packetsize);
-        return p;
+        return nouveaupack; // retourne le packet
     }
 
 

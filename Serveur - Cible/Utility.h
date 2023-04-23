@@ -1,5 +1,5 @@
 //
-// Created by Berlingot on 2023-04-21.
+// Fichier qui permet de faire le transfert de fichier entre la cible et le client
 //
 
 #ifndef SERVEUR___CIBLE_UTILITY_H
@@ -8,9 +8,9 @@
 #include <string>
 
 class Utility {
-public: //functions
+public:
     static bool fileExists(std::string path);
 };
 
 
-#endif //SERVEUR___CIBLE_UTILITY_H
+#endif

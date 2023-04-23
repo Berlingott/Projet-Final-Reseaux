@@ -1,5 +1,5 @@
 //
-// Created by Berlingot on 2023-04-18.
+// Initialisation d'une winsock API DATA Structure
 //
 
 #include "Network.h"
@@ -21,8 +21,7 @@ bool MyPNet::Network::Initialize() {
         return false;
     }
     std::cerr << "Demarage du Winsock API DATA Structure";
-
-    return true; // tout va bien
+    return true; // tout va bien - orelsan
 }
 
 void MyPNet::Network::Shutdown() {

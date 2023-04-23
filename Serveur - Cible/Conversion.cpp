@@ -1,18 +1,16 @@
 //
 // Fonction provenant de librairie conversion windows
 //https://cplusplus.com/reference/string/string/c_str/
+//https://www.geeksforgeeks.org/convert-stdstring-to-lpcwstr-in-c/
 
 #include "Conversion.h"
 
-LPTSTR Conversion::convStringToLPTSTR(std::string s)
-{
-    //LOOK FOR WAY
+LPTSTR Conversion::convStringToLPTSTR(std::string s){
     LPSTR cString = _strdup(s.c_str());
     return cString;
 }
 
-std::wstring Conversion::convStringToWidestring(const std::string& s)
-{
+std::wstring Conversion::convStringToWidestring(const std::string& s){
     int len;
     int slength = (int)s.length() + 1;
     len = MultiByteToWideChar(CP_ACP, 0, s.c_str(), slength, 0, 0);

@@ -1,6 +1,8 @@
 //
-// Created by Berlingot on 2023-04-22.
+// Cette classe permet de gerer les exécution de console sur windows.
+// reference https://msdn.microsoft.com/en-us/library/windows/desktop/ms682499(v=vs.85).aspx
 //
+
 #include "General.h"
 
 bool General::cmdMode = false;
@@ -8,8 +10,7 @@ bool General::cmdMode = false;
 void General::outputMsg(std::string message, int msgType)
 {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    switch (msgType)
-    {
+    switch (msgType){
         case 1:
             SetConsoleTextAttribute(hConsole, 10);
             std::cout << message << std::endl;
@@ -21,9 +22,7 @@ void General::outputMsg(std::string message, int msgType)
             SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
             break;
         case 3:
-            //SetConsoleTextAttribute(hConsole, FOREGROUND_INTENSITY);
             std::cout << message;
-            //SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE);
             break;
     }
 }

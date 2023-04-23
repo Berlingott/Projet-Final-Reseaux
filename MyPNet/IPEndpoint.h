@@ -1,5 +1,5 @@
 //
-// Created by Berlingot on 2023-04-19.
+// Fichier endpoint contient toutes les information necessaire pour la maintenance d'une connection
 //
 
 #ifndef MYPNET_IPENDPOINT_H

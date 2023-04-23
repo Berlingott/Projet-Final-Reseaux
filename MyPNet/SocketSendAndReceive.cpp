@@ -15,8 +15,8 @@ namespace MyPNet{
 
         uint16_t bufferSize = ntohs(encodedSize);
 
-        packet.buffer.resize(bufferSize);
-        result = ReceiveALL(&packet.buffer[0], bufferSize);
+        packet.bufferMyPNet.resize(bufferSize);
+        result = ReceiveALL(&packet.bufferMyPNet[0], bufferSize);
 
         if (result != PResult::P_Success){
             return PResult::P_FAILED;
@@ -67,14 +67,14 @@ namespace MyPNet{
 
 
     PResult Socket::SendPaquets(Packet &packet) {
-        uint16_t encodedPacketSize = htons(packet.buffer.size());
+        uint16_t encodedPacketSize = htons(packet.bufferMyPNet.size());
         PResult result = SendALL(&encodedPacketSize, sizeof(uint16_t));
 
         if (result != PResult::P_Success){
             return PResult::P_FAILED;
         }
 
-        result = SendALL(packet.buffer.data(), packet.buffer.size());
+        result = SendALL(packet.bufferMyPNet.data(), packet.bufferMyPNet.size());
 
         if (result != PResult::P_Success){
             return PResult::P_FAILED;

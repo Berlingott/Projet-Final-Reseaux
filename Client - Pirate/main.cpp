@@ -7,8 +7,6 @@
 const char * adresseipPirate = "127.0.0.1";
 const unsigned short portPirate = 1337;
 
-
-
 bool ProcessPacket(MyPNet::Packet & packet){
     switch (packet.GetPacketType()) {
         case MyPNet::PacketType::PT_ChatMessage: {
@@ -38,16 +36,13 @@ int main(){ // Main client -- cible
     Connexion connexioninbound(adresseipPirate, portPirate, ConnexionType::INBOUND);
 
     connexioninbound.ListenForNewConnection();
-
     connexioninbound.HandleInput();
 
-
-    system("pause");
+    system("pause"); // un thread sera en pause ici
     return 0;
 }
     /*
     if(MyPNet::Network::Initialize()){
-
         MyPNet::Socket socket;
         if(socket.CreateSocket() == MyPNet::PResult::P_Success){
             std::cout << std::endl<< "Création du socket réussi"<<std::endl;
@@ -74,11 +69,9 @@ int main(){ // Main client -- cible
                     }
                 }
             }
-
             socket.CloseSocket();
         }
     }
-
     MyPNet::Network::Shutdown(); //ferme l'interface
     return 0;
 }*/

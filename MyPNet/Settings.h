@@ -1,6 +1,6 @@
 //
-// Created by Berlingot on 2023-04-19.
-//
+// parametre generaux de la bibliotheque
+// DEPRECATED
 
 #ifndef MYPNET_SETTINGS_H
 #define MYPNET_SETTINGS_H

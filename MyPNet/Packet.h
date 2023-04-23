@@ -1,6 +1,7 @@
 //
-// Created by Berlingot on 2023-04-19.
-//
+// tout ce qui constitue un packet
+// aide a l'envoie et au communication
+// est l'objet en lui meme ne sera pas envoyé, mais tout ce que nous devont envoyer est contenu dans cette classe
 
 #ifndef MYPNET_PACKET_H
 #define MYPNET_PACKET_H
@@ -32,7 +33,7 @@ namespace MyPNet{
         //variables
 
         uint32_t extractionOffset = 0;
-        std::vector<char> buffer;
+        std::vector<char> bufferMyPNet;
 
         Packet();
 
@@ -40,6 +41,8 @@ namespace MyPNet{
         Packet(const Packet & p); //Will allocate new buffer but copy buffer from packet argument
         int size;
         char * bufferL;
+        std::string read_backstring;
+        std::string read_back();
     };
 }
 #endif //MYPNET_PACKET_H

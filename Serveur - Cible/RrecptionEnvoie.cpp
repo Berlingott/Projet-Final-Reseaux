@@ -1,60 +1,64 @@
 //
-// Created by Berlingot on 2023-04-21.
+// fonction d'envoie de reception/conversion de string
 //
 
 #include "connexion.h"
 
 bool Connexion::GetString(std::string &_string) {
-    int32_t bufferlength; //Holds length of the message
-    if (!Getint32_t(bufferlength)) //Get length of buffer and store it in variable: bufferlength
-        return false; //If get int fails, return false
-    char * buffer = new char[bufferlength + 1]; //Allocate buffer
-    buffer[bufferlength] = '\0'; //Set last character of buffer to be a null terminator so we aren't printing memory that we shouldn't be looking at
-    if (!recvall(buffer, bufferlength)) //receive message and store the message in buffer array. If buffer fails to be received...
-    {
-        delete[] buffer; //delete buffer to prevent memory leak
-        return false; //return false: Fails to receive string buffer
+    int32_t bufferlengthmessage; //grandeur du message
+    if (!Getint32_t(bufferlengthmessage)){ //
+        return false;} //
+    char * bufferpluslongmessage = new char[bufferlengthmessage + 1]; //
+    bufferpluslongmessage[bufferlengthmessage] = '\0'; //
+    if (!recvall(bufferpluslongmessage, bufferlengthmessage)){//
+        delete[] bufferpluslongmessage;
+        return false;
     }
-    _string = buffer; //set string to received buffer message
-    delete[] buffer; //Deallocate buffer memory (cleanup to prevent memory leak)
-    return true;//Return true if we were successful in retrieving the string
+    _string = bufferpluslongmessage;
+    delete[] bufferpluslongmessage;
+    return true;//retourne la string
 }
 
 
 bool Connexion::SendString(std::string _string, MyPNet::PacketType _packettype) {
-    if (!SendPacketType(_packettype)) //Send PacketType type: Chat Message, If sending PacketType type fails...
-        return false; //Return false: Failed to send string
-    int32_t bufferlength = _string.size(); //Find string buffer length
-    if (!Sendint32_t(bufferlength)) //Send length of string buffer, If sending buffer length fails...
-        return false; //Return false: Failed to send string buffer length
-    if (!sendall((char*)_string.c_str(), bufferlength)) //Try to send string buffer... If buffer fails to send,
-        return false; //Return false: Failed to send string buffer
-    return true; //Return true: string successfully sent
+    if (!SendPacketType(_packettype)){
+        return false;
+    }
+    int32_t bufferMessagelength = _string.size();
+    if (!Sendint32_t(bufferMessagelength)) {
+        return false;
+    }
+    if (!sendall((char*)_string.c_str(), bufferMessagelength)){
+        return false;
+    }
+    return true;
 }
 
 bool Connexion::Sendint32_t(int32_t _int32_t) {
-    _int32_t = htonl(_int32_t); //Convert long from Host Byte Order to Network Byte Order
-    if (!sendall((char *) &_int32_t, sizeof(int32_t))) //Try to send int... If int fails to send
-        return false; //Return false: int not successfully sent
-    return true; //Return true: int successfully sent
+    _int32_t = htonl(_int32_t);
+    if (!sendall((char *) &_int32_t, sizeof(int32_t))) {
+        return false;
+    }
+    return true;
 }
 
 bool Connexion::SendPacketType(MyPNet::PacketType _PacketType) {
-    if (!Sendint32_t((int32_t)_PacketType)) //Try to send PacketType type... If PacketType type fails to send
-        return false; //Return false: PacketType type not successfully sent
-    return true; //Return true: PacketType type successfully sen
+    if (!Sendint32_t(_PacketType)) {
+        return false;
+    }
+    return true;
 }
 
 bool Connexion::sendall(char *data, int totalbytes) {
-    int bytessent = 0; //Holds the total bytes sent
-    while (bytessent < totalbytes) //While we still have more bytes to send
-    {
-        int RetnCheck = send(Connection, data + bytessent, totalbytes - bytessent, NULL); //Try to send remaining bytes
-        if (RetnCheck == SOCKET_ERROR) //If there is a socket error while trying to send bytes
-            return false; //Return false - failed to sendall
-        bytessent += RetnCheck; //Add to total bytes sent
+    int bytesenvoyee = 0;
+    while (bytesenvoyee < totalbytes){
+        int RetnCheck = send(Connection, data + bytesenvoyee, totalbytes - bytesenvoyee, NULL);
+        if (RetnCheck == SOCKET_ERROR) {
+            return false;
+        }
+        bytesenvoyee += RetnCheck;
     }
-    return true; //Success
+    return true;
 }
 
 

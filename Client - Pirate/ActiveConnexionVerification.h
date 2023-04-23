@@ -10,16 +10,17 @@
 
 class ActiveConnexionVerification {
 public:
-    ActiveConnexionVerification(SOCKET socket_)
-    {
+    ActiveConnexionVerification(SOCKET socket_){//constructeur inline
         socket = socket_;
-        ActiveConnection = true; //Default to active connection
+        ActiveConnection = true;
     }
     bool ActiveConnection; //True if connection is active, false if inactive(due to a disconnect)
     SOCKET socket;
-    //file transfer data
-    FichierDeTransfer fichier; //Object that contains information about our file that is being sent to the client from this server
-    GestionPacket gestionpacket; //Packet Manager for outgoing data for this connection
+
+
+
+    FichierDeTransfer fichier;
+    GestionPacket gestionpacket;
 };
 
 

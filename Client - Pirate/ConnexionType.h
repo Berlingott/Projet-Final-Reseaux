@@ -1,5 +1,5 @@
 //
-// Created by Berlingot on 2023-04-20.
+// Type de COnnexion
 //
 
 #ifndef CLIENT___PIRATE_CONNEXIONTYPE_H

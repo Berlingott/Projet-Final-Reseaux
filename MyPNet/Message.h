@@ -1,7 +1,9 @@
 //
-// Created by Berlingot on 2023-04-22.
-//
-
+// Les messages sont dans les packets
+//  Les messages sont ce qui seront envoyé par le socket
+// la premiere partie sert a identifier le type de packet
+// la deuxieme la longueur du reste du packet (longueur total - 2 premiers)
+// le reste de tailles variables, contient les instruction/messages
 #ifndef MYPNET_MESSAGE_H
 #define MYPNET_MESSAGE_H
 
@@ -13,7 +15,7 @@ namespace MyPNet{
 class Message {
 public:
     Message(std::string);
-    Packet toPacket(PacketType _packettype); //Converts ChatMessage to packet
+    Packet toPacket(PacketType _packettype); //preparation d'un message en paquet
     std::string message;
 private:
     };

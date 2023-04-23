@@ -1,12 +1,12 @@
 //
-// Created by Berlingot on 2023-04-21.
-//reference https://msdn.microsoft.com/en-us/library/windows/desktop/ms682499(v=vs.85).aspx
+// Cette classe permet de gerer les exécution de console sur windows.
+// reference https://msdn.microsoft.com/en-us/library/windows/desktop/ms682499(v=vs.85).aspx
+//
 
 #include "CMD.h"
 
 
-CMD::CMD(std::string path)
-{
+CMD::CMD(std::string path){
     saAttr.nLength = sizeof(SECURITY_ATTRIBUTES);
     saAttr.bInheritHandle = TRUE;
     saAttr.lpSecurityDescriptor = NULL;
@@ -29,8 +29,7 @@ CMD::CMD(std::string path)
 
     createChildProcess(path);
 
-    cmdptr = this;
-}
+    cmdptr = this;}
 
 
 CMD* CMD::cmdptr = NULL;
