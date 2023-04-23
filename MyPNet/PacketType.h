@@ -9,7 +9,8 @@
 #include <cstdint>
 
 namespace MyPNet{
-    enum PacketType : uint32_t {
+    enum PacketType : int32_t {
+        ETVOILA,
         Instruction,
         CMDCommand,
         Warning,

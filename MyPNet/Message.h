@@ -14,8 +14,8 @@ class Message {
 public:
     Message(std::string);
     Packet toPacket(PacketType _packettype); //Converts ChatMessage to packet
-private:
     std::string message;
+private:
     };
 };
 

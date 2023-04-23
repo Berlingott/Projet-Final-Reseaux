@@ -61,7 +61,7 @@ void Connexion::processConnexion() {
     {if (!connexionptrreference->identificationPacketTyoe(packettype)){std::cout<<"1"; //Get PacketType type
            break; //If there is an issue getting the PacketType type, exit this loop
             }
-        if (!connexionptrreference->ProcessPacketType(packettype)){std::cout<<"2"; //Process PacketType (PacketType type)
+        if (!connexionptrreference->ProcessPacketType(packettype)){std::cerr<<"ProcessPacketType sortie"; //Process PacketType (PacketType type)
            break; //If there is an issue processing the PacketType, exit this loop
         }
     }

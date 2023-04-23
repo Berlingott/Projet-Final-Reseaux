@@ -22,14 +22,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="527e96f3-8d11-4d81-b667-500942689616" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../Client - Pirate/Connexion.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../Client - Pirate/Connexion.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MyPNet/Message.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/Message.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../MyPNet/Packet.h" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/Packet.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MyPNet/Message.h" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/Message.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../MyPNet/PacketType.h" beforeDir="false" afterPath="$PROJECT_DIR$/../MyPNet/PacketType.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Connexion.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Connexion.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Connexion.h" beforeDir="false" afterPath="$PROJECT_DIR$/Connexion.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,35 +53,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "last_opened_file_path": "C:/Users/Berlingot/Desktop/Projet-Final-Reseaux/Serveur - Cible",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "CPPToolchains",
-    "structure.view.defaults.are.configured": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Berlingot/Desktop/Projet-Final-Reseaux/Serveur - Cible&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;CPPToolchains&quot;,
+    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Berlingot\Desktop\Projet-Final-Reseaux\Serveur - Cible" />
     </key>
   </component>
   <component name="RunManager" selected="CMake Application.Serveur___Cible">
-    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="MyPNet" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Serveur___Cible" TARGET_NAME="MyPNet" CONFIG_NAME="Debug">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -114,7 +106,8 @@
       <workItem from="1681868013226" duration="409000" />
       <workItem from="1681872097545" duration="27562000" />
       <workItem from="1682006803319" duration="4666000" />
-      <workItem from="1682012179342" duration="57335000" />
+      <workItem from="1682012179342" duration="59491000" />
+      <workItem from="1682213478191" duration="5171000" />
     </task>
     <servers />
   </component>
@@ -144,6 +137,21 @@
           <url>file://$PROJECT_DIR$/RrecptionEnvoie.cpp</url>
           <line>9</line>
           <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Connexion.cpp</url>
+          <line>113</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Connexion.cpp</url>
+          <line>95</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Connexion.cpp</url>
+          <line>60</line>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
